@@ -8,14 +8,45 @@ import {APP_CONFIG} from './app.config';
 import {TokenInterceptorService} from './services/interceptors/token-interceptor.service';
 import {ErrorInterceptorService} from './services/interceptors/error-interceptor.service';
 import {CommonHeadersInterceptorService} from './services/interceptors/common-headers-interceptor.service';
+import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
+import { EventComponent } from './event/event.component';
+import { ArtistComponent } from './artist/artist.component';
+import { LoginComponent } from './login/login.component';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RouterModule } from '@angular/router';
+import {ROUTES} from './app.routes';
+import { EventDetailComponent } from './event-detail/event-detail.component';
+import { EventModifComponent } from './event-modif/event-modif.component';
+import { UserModifComponent } from './user-modif/user-modif.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
+import { ArtistModifComponent } from './artist-modif/artist-modif.component';
+import { InscriptionArtistComponent } from './inscription-artist/inscription-artist.component' ;
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    UserComponent,
+    EventComponent,
+    ArtistComponent,
+    LoginComponent,
+    InscriptionComponent,
+    ProfileComponent,
+    EventDetailComponent,
+    EventModifComponent,
+    UserModifComponent,
+    UserDetailComponent,
+    ArtistDetailComponent,
+    ArtistModifComponent,
+    InscriptionArtistComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [
     {provide: APP_CONFIG, useValue: environment},
