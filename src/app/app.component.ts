@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UserService} from './user/user.service';
+import {UserService} from './user-service/user.service';
 import {HelloRepository} from './hello/hello.repository';
 import {HttpErrorResponse} from '@angular/common/http';
 

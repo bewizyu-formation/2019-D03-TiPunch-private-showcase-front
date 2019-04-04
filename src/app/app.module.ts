@@ -15,6 +15,14 @@ import { ArtistComponent } from './artist/artist.component';
 import { LoginComponent } from './login/login.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RouterModule } from '@angular/router';
+import {ROUTES} from './app.routes';
+import { EventDetailComponent } from './event-detail/event-detail.component';
+import { EventModifComponent } from './event-modif/event-modif.component';
+import { UserModifComponent } from './user-modif/user-modif.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
+import { ArtistModifComponent } from './artist-modif/artist-modif.component' ;
 
 @NgModule({
   declarations: [
@@ -25,11 +33,18 @@ import { ProfileComponent } from './profile/profile.component';
     ArtistComponent,
     LoginComponent,
     InscriptionComponent,
-    ProfileComponent
+    ProfileComponent,
+    EventDetailComponent,
+    EventModifComponent,
+    UserModifComponent,
+    UserDetailComponent,
+    ArtistDetailComponent,
+    ArtistModifComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [
     {provide: APP_CONFIG, useValue: environment},
