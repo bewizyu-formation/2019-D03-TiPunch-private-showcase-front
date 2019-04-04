@@ -8,10 +8,24 @@ import {APP_CONFIG} from './app.config';
 import {TokenInterceptorService} from './services/interceptors/token-interceptor.service';
 import {ErrorInterceptorService} from './services/interceptors/error-interceptor.service';
 import {CommonHeadersInterceptorService} from './services/interceptors/common-headers-interceptor.service';
+import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
+import { EventComponent } from './event/event.component';
+import { ArtistComponent } from './artist/artist.component';
+import { LoginComponent } from './login/login.component';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    UserComponent,
+    EventComponent,
+    ArtistComponent,
+    LoginComponent,
+    InscriptionComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
