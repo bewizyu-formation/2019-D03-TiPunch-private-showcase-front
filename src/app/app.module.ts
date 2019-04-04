@@ -22,7 +22,8 @@ import { EventModifComponent } from './event-modif/event-modif.component';
 import { UserModifComponent } from './user-modif/user-modif.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
-import { ArtistModifComponent } from './artist-modif/artist-modif.component' ;
+import { ArtistModifComponent } from './artist-modif/artist-modif.component';
+import { InscriptionArtistComponent } from './inscription-artist/inscription-artist.component' ;
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ArtistModifComponent } from './artist-modif/artist-modif.component' ;
     UserModifComponent,
     UserDetailComponent,
     ArtistDetailComponent,
-    ArtistModifComponent
+    ArtistModifComponent,
+    InscriptionArtistComponent
   ],
   imports: [
     BrowserModule,
