@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-import { PATH_HOME, PATH_ARTIST, PATH_USER, PATH_EVENT, PATH_LOGIN, PATH_INSCRIPTION, PATH_PROFILE, PATH_INSCRIPTION_ARTIST } from './app.routes.constantes';
+import { PATH_HOME, PATH_ARTIST, PATH_USER, PATH_EVENT,
+     PATH_LOGIN, PATH_INSCRIPTION, PATH_PROFILE, PATH_INSCRIPTION_ARTIST } from './app.routes.constantes';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { EventComponent } from './event/event.component';
@@ -19,7 +20,8 @@ import { InscriptionArtistComponent } from './inscription-artist/inscription-art
 export const ROUTES: Routes = [
     { path: PATH_HOME, component: HomeComponent },
     { path: PATH_LOGIN, component: LoginComponent },
-    { path: PATH_INSCRIPTION, component: InscriptionComponent ,children: [
+    { path: PATH_INSCRIPTION, component: InscriptionComponent,
+        children: [
         { path: PATH_INSCRIPTION_ARTIST, component: InscriptionArtistComponent, },
     ]},
     { path: PATH_PROFILE, component: ProfileComponent },
