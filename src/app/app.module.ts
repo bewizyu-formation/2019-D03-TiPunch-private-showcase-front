@@ -51,7 +51,7 @@ import {MatButtonModule} from '@angular/material/button';
     HttpClientModule,
 
     RouterModule.forRoot(ROUTES),
-    MatButtonModule
+    MatButtonModule,
 
     RouterModule.forRoot(ROUTES)
 
