@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UniqueLoginService } from './unique-login.service';
+import { UniqueLoginValidatorService } from './unique-login-validator.service';
 
-describe('UniqueLoginService', () => {
+describe('UniqueLoginValidatorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: UniqueLoginService = TestBed.get(UniqueLoginService);
+    const service: UniqueLoginValidatorService = TestBed.get(UniqueLoginValidatorService);
     expect(service).toBeTruthy();
   });
 });

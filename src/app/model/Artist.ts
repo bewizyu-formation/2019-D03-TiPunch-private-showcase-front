@@ -1,11 +1,15 @@
-export class User{
+import {User} from "./User";
+
+export class Artist{
 
   constructor(
     public id:number,
-    public username:string,
-    public password:string,
-    public mail:string,
-    public city:string,
-    public artists:Array<Artist>
+    public nameArtist:string,
+    public mailArtist:string,
+    public cityArtist:string,
+    public descriptionArtist:string,
+    public noteArtist:string,
+    public nbVotes:string,
+    public users:Array<User>
   ){}
 }
