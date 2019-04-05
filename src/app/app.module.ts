@@ -25,6 +25,9 @@ import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 import { ArtistModifComponent } from './artist-modif/artist-modif.component';
 import { InscriptionArtistComponent } from './inscription-artist/inscription-artist.component' ;
 
+import {MatButtonModule} from '@angular/material/button';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +49,12 @@ import { InscriptionArtistComponent } from './inscription-artist/inscription-art
   imports: [
     BrowserModule,
     HttpClientModule,
+
+    RouterModule.forRoot(ROUTES),
+    MatButtonModule,
+
     RouterModule.forRoot(ROUTES)
+
   ],
   providers: [
     {provide: APP_CONFIG, useValue: environment},
