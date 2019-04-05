@@ -10,10 +10,10 @@ import { PATH_LOGIN, PATH_INSCRIPTION } from '../app.routes.constantes';
 export class HomeComponent implements OnInit {
 
   constructor(private router: Router) { }
-  NavigateToLogin(){
+  NavigateToLogin() {
     this.router.navigate([PATH_LOGIN]);
   }
-  NavigateToInscription(){
+  NavigateToInscription() {
     this.router.navigate([PATH_INSCRIPTION]);
   }
   ngOnInit() {
