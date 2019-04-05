@@ -24,9 +24,10 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 import { ArtistModifComponent } from './artist-modif/artist-modif.component';
 import { InscriptionArtistComponent } from './inscription-artist/inscription-artist.component' ;
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,17 +45,18 @@ import {MatButtonModule} from '@angular/material/button';
     UserDetailComponent,
     ArtistDetailComponent,
     ArtistModifComponent,
-    InscriptionArtistComponent
+    InscriptionArtistComponent,
+    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-
     RouterModule.forRoot(ROUTES),
     MatButtonModule,
-
-    RouterModule.forRoot(ROUTES)
-
+    MatInputModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: APP_CONFIG, useValue: environment},

@@ -1,3 +1,33 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <div class="app-bar-bg">
+    <div class="button-bg">
+      <a class="return" (click)="NavigateToHome()">&larr;</a>
+    </div>
+    <h1 class="Private-ShowCase">Private showcase</h1>
+    <div class="vide">
+    </div>
+  </div>
+  <div class="bottom">
+    <img src="../../assets/banni-re.jpg" srcset="../../assets/banni-re@2x.jpg 2x,
+       ../../assets/banni-re@3x.jpg 3x" class="Bannire">
+    <div class="Fond">
+      <h3 class="title">Formulaire de connexion</h3>
+      <form class="formulaire-connexion" (ngSubmit)="handleSubmit()"  [formGroup]="userForm" >
+        <mat-form-field class ="bounds">
+          <input matInput placeholder="Identifiant" [(ngModel)]="user.login" [formControl]="loginCtrl" value="">
+        </mat-form-field>
+        <mat-form-field class="bounds">
+          <input matInput type="password"  [(ngModel)]="user.password" [formControl]="passwordCtrl" placeholder="Mot de passe">
+        </mat-form-field>
+        <div class="buttons">
+          <span>
+            <button mat-button (click)="Cancel()" class="button-bg-gris">Annuler</button>
+          </span>
+          <span>
+            <button mat-button type="submit" class="button-bg-vert"  [disabled]="userForm.invalid">Valider</button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
