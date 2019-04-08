@@ -15,6 +15,7 @@ import { EventModifComponent } from './event-modif/event-modif.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 import { ArtistModifComponent } from './artist-modif/artist-modif.component';
 import { InscriptionArtistComponent } from './inscription-artist/inscription-artist.component';
+import { LoggedInGuard } from './logged-in.guard';
 
 
 export const ROUTES: Routes = [
@@ -26,7 +27,7 @@ export const ROUTES: Routes = [
     ]},
     { path: PATH_PROFILE, component: ProfileComponent },
     {
-        path: PATH_USER, component: UserComponent,
+        path: PATH_USER, component: UserComponent,canActivate: [LoggedInGuard],
         children: [
             { path: ':id', component: UserDetailComponent, },
             { path: ':id/modification', component: UserModifComponent, }

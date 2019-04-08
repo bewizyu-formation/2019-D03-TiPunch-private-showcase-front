@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {  PATH_HOME, PATH_USER } from '../app.routes.constantes';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserRepository } from '../user-service/user.repository';
 import { UserService } from '../user-service/user.service';
+import { LoggedInGuard } from '../logged-in.guard';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +12,15 @@ import { UserService } from '../user-service/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginCtrl: FormControl;
+  usernameCtrl: FormControl;
   passwordCtrl: FormControl;
   userForm: FormGroup;
-  user:any={login:"",password:""};
-  constructor(private router: Router,fb: FormBuilder,private userService:UserService) {
-    this.loginCtrl = fb.control('', [Validators.required,/*Validators.pattern(/^[a-zA-Z0-9-\_\ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}$/g)*/]);
+  try:boolean=false;
+  constructor(private router: Router,fb: FormBuilder,private userService:UserService,private guard:LoggedInGuard) {
+    this.usernameCtrl = fb.control('', [Validators.required]);
     this.passwordCtrl = fb.control('', [Validators.required]);               
     this.userForm = fb.group({
-      login: this.loginCtrl,
+      username: this.usernameCtrl,
       password: this.passwordCtrl,
   
     });
@@ -28,10 +29,21 @@ export class LoginComponent implements OnInit {
     this.router.navigate([PATH_HOME]);
   }
   handleSubmit(){
-    console.log(this.user);
-    this.userService.login(this.user.login,this.user.password)
-    this.router.navigate([PATH_USER]);
+    this.try=true;
+    console.log(this.userForm.value);
+    this.userService.login(this.usernameCtrl.value,this.passwordCtrl.value).then(token=>{
+      if(token!=undefined){
+        this.router.navigate([PATH_USER]);
+      }
+    }).catch()
+  }
+  Cancel(){
+    this.usernameCtrl.setValue("");
+    this.passwordCtrl.setValue("");
+    this.usernameCtrl.markAsPending({onlySelf:false});
+    this.passwordCtrl.markAsPending({onlySelf:false});
   }
   ngOnInit() {
+    this.try=false
   }
 }

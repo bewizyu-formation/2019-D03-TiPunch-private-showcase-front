@@ -13,15 +13,18 @@
     <div class="Fond">
       <h3 class="title">Formulaire de connexion</h3>
       <form class="formulaire-connexion" (ngSubmit)="handleSubmit()"  [formGroup]="userForm" >
+        <div *ngIf="this.userService.token===undefined && this.try==true">
+          l'utilisateur ou le mot de passe est incorrect
+        </div>
         <mat-form-field class ="bounds">
-          <input matInput placeholder="Identifiant" [(ngModel)]="user.login" [formControl]="loginCtrl" value="">
+          <input matInput placeholder="Identifiant" [formControl]="usernameCtrl" value="">
         </mat-form-field>
         <mat-form-field class="bounds">
-          <input matInput type="password"  [(ngModel)]="user.password" [formControl]="passwordCtrl" placeholder="Mot de passe">
+          <input matInput type="password" [formControl]="passwordCtrl" placeholder="Mot de passe">
         </mat-form-field>
         <div class="buttons">
           <span>
-            <button mat-button (click)="Cancel()" class="button-bg-gris">Annuler</button>
+            <button mat-button type="reset" (click)="Cancel()" class="button-bg-gris">Annuler</button>
           </span>
           <span>
             <button mat-button type="submit" class="button-bg-vert"  [disabled]="userForm.invalid">Valider</button>
