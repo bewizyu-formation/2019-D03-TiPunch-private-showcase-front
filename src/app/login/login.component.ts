@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
   }
   handleSubmit(){
     this.try=true;
-    console.log(this.userForm.value);
     this.userService.login(this.usernameCtrl.value,this.passwordCtrl.value).then(token=>{
       if(token!=undefined){
         this.router.navigate([PATH_USER]);
