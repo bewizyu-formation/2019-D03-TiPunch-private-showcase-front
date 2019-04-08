@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {UserRepository} from './user.repository';
-import {HttpResponse} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { UserRepository } from './user.repository';
+import { HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +20,16 @@ export class UserService {
    * @param username User login name
    * @param password User Password
    */
-  login(username: string, password: string): Promise<string> {
-    return new Promise ((resolve) => {
+  login(username: string, password: string): Promise<any> {
+    return new Promise((resolve) => {
       this.userRepository
         .login(username, password)
-        .subscribe((response: HttpResponse<any>) => {
+        .toPromise()
+        .then((response: HttpResponse<any>) => {
           this.token = response.headers.get('Authorization');
-          console.log('Response Token : ', this.token);
-          resolve(this.token);
-        });
+          resolve(response.status);
+        })
+        .catch((response: HttpResponse<any>) => { resolve(response.status); });
     });
   }
 }
