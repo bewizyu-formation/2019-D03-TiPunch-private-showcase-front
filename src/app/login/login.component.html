@@ -13,8 +13,8 @@
     <div class="Fond">
       <h3 class="title">Formulaire de connexion</h3>
       <form class="formulaire-connexion" (ngSubmit)="handleSubmit()"  [formGroup]="userForm" >
-        <div *ngIf="this.userService.token===undefined && this.try==true">
-          l'utilisateur ou le mot de passe est incorrect
+        <div style="color:red" *ngIf="this.error" >
+          le nom d'utilisateur ou le mot de passe est incorrect
         </div>
         <mat-form-field class ="bounds">
           <input matInput placeholder="Identifiant" [formControl]="usernameCtrl" value="">
