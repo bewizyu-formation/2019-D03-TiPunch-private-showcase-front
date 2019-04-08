@@ -1,11 +1,12 @@
 <div class="formDiv">
   <h4>Formulaire d'inscription</h4>
-  <form (ngSubmit)="handleSubmit()" [formGroup]="userForm">
 
+  <form (ngSubmit)="handleSubmit()" [formGroup]="userForm">
+    <mat-checkbox (change)="handleCheck($event)">Êtes vous un artiste proposant des prestations privées ?</mat-checkbox>
     <mat-form-field class="example-full-width">
       <input matInput type="text" placeholder="Identifiant" value="" [formControl]="usernameCtrl">
     </mat-form-field>
-    <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('uniqueLogin')">Le champ identifiant existe déjà</div>
+    <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('uniqueLogin')">Cet identifiant existe déjà</div>
     <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('invalidLogin')">Le champ identifiant n'est pas valide</div>
     <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('required')">Le champ identifiant est obligatoire</div>
     <div class="divPwd" [formGroup]="passwordsGroup">
@@ -40,10 +41,18 @@
       </mat-autocomplete>
     </mat-form-field>
     <div *ngIf="cityCtrl.dirty && cityCtrl.hasError('required')">Le champ ville est obligatoire</div>
-
-    <div>
-      <button class="btn-annulation" mat-button>Annuler</button>
-      <button class="btn-validate" mat-button type="submit">Valider</button>
+    <div class="ifDiv" *ngIf="displayArtistFields; else classicValidate">
+      <app-inscription-artist (validationArtist)="handleArtistForm($event)"
+                              (clearForm)="handleClear()"></app-inscription-artist>
     </div>
+
+
+    <ng-template #classicValidate>
+      <div class="buttonsDiv">
+        <button type="reset" (click)="handleClear()" class="btn-annulation" mat-button>Annuler</button>
+        <button class="btn-validate" mat-button type="submit">Valider</button>
+      </div>
+    </ng-template>
+
   </form>
 </div>

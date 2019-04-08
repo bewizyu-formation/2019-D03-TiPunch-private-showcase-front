@@ -10,7 +10,12 @@ export class UniqueLoginValidatorService {
   constructor(private apiServices: SpringApiServicesService) { }
 
   usernameExists: AsyncValidatorFn = (control: AbstractControl): Promise<ValidationErrors> => {
-    let verificationBase: any =  this.apiServices.uniqueLogin(control.value);
+    let verificationBase: any =  this.apiServices.uniqueLogin(control.value, false);
      return verificationBase;
+  };
+
+  artistNameExists: AsyncValidatorFn = (control: AbstractControl): Promise<ValidationErrors> => {
+    let verificationBase: any =  this.apiServices.uniqueLogin(control.value, true);
+    return verificationBase;
   };
 }

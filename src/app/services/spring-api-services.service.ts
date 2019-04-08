@@ -3,9 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {User} from "../model/User";
 import {Artist} from "../model/Artist";
 
-const API_BASE_URL: string = '';
-const API_USER: string = '';
-const API_ARTIST:string = '';
+const API_BASE_URL: string = 'http://localhost:8080';
+const API_USER: string = '/users/';
+const API_ARTIST:string = '/artist/';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,9 @@ export class SpringApiServicesService {
 
   addUser(user:User){
     console.log("addUser");
+    console.log(`${API_BASE_URL}${API_USER}`, user);
 
-   return this.http.post(`${API_BASE_URL}${API_USER}`, user);
+   return this.http.put(`${API_BASE_URL}${API_USER}`, user);
   }
 
   updateUser(user:User){
@@ -51,10 +52,10 @@ export class SpringApiServicesService {
     //return this.http.get(`${API_BASE_URL}${API_ARTIST}${artist.id}`);
   }
 
-  addArtist(artist:Artist){
+  addArtist(data:any){
 
     console.log("addArtist");
-   // return this.http.post(`${API_BASE_URL}${API_ARTIST}`, artist);
+    return this.http.post(`${API_BASE_URL}${API_ARTIST}`, data);
   }
 
   updateArtist(artist:Artist){
@@ -65,7 +66,7 @@ export class SpringApiServicesService {
 
 
   //Verifie si le login est valide, puis si il existe dejà en base
-  async uniqueLogin(login:string){
+  async uniqueLogin(login:string, artist: boolean){
 
     let result:any;
 
@@ -75,14 +76,17 @@ export class SpringApiServicesService {
     if(test) {
 
      let verificationBase: any = true;
-      //let verificationBase: any = await this.http.get(`${API_BASE_URL}${login}`);
+      const typeOfLogin:string =(artist == true)?'/artist/exists':'/user/exists';
+        //let verificationBase: any = await this.http.get(`${API_BASE_URL}${typeOfLogin}${login}`);
+
+
 
       if (verificationBase) {
         console.log('verifOK');
         result = null;
 
       } else {
-        console.log('uniquer pas OK');
+        console.log('unique pas OK');
         result = {uniqueLogin: true};
       }
 

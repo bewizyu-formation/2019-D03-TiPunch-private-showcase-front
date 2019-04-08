@@ -51,4 +51,13 @@ h4{
   color: rgba(0, 0, 0, 0.54);
 }
 
+.ifDiv{
+  width: 100%;
+}
 
+.buttonsDiv{
+  display: inline;
+  width: 100%;
+  text-align: right;
+  margin-top: 10px;
+}
