@@ -14,6 +14,7 @@
         <input matInput type="password" placeholder="Mot de passe" value="" [formControl]="passwordCtrl">
       </mat-form-field>
       <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">Le champ mot de passe est obligatoire</div>
+      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('pattern')">Le champ mot de passe  doit contenir 8 caractères (au moins une minuscule, une majuscule et un chiffre)</div>
       <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('passwordValid')">Les champs mot de passe doivent être
         identiques
       </div>
@@ -31,22 +32,29 @@
 
     <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">Le champ email n'est pas valide</div>
     <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">Le champ email est obligatoire</div>
-    <mat-form-field class="example-full-width">
-      <input type="text" placeholder="Ville" aria-label="Number" matInput [formControl]="cityCtrl"
-             [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of options" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+
+    <div *ngIf="options.length != 0; else inputCity">
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Ville" aria-label="Number" matInput [formControl]="cityCtrl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of options" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <ng-template #inputCity>
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Ville" value="" [formControl]="cityCtrl">
+      </mat-form-field>
+    </ng-template>
     <div *ngIf="cityCtrl.dirty && cityCtrl.hasError('required')">Le champ ville est obligatoire</div>
+
     <div class="ifDiv" *ngIf="displayArtistFields; else classicValidate">
       <app-inscription-artist (validationArtist)="handleArtistForm($event)"
                               (clearForm)="handleClear()"></app-inscription-artist>
     </div>
-
-
     <ng-template #classicValidate>
       <div class="buttonsDiv">
         <button type="reset" (click)="handleClear()" class="btn-annulation" mat-button>Annuler</button>

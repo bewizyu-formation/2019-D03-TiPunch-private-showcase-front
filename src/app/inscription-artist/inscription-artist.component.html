@@ -7,8 +7,9 @@
   <div *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('invalidLogin')">Le champ nom de l'artiste  n'est pas valide</div>
 
   <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Leave a comment" [formControl]="descriptionCtrl"></textarea>
+    <textarea matInput placeholder="Description de l'artiste" [formControl]="descriptionCtrl"></textarea>
     <div *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('required')">Le champ description est obligatoire</div>
+    <div *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('pattern')">Le champ n'est pas valide</div>
 
   </mat-form-field>
 

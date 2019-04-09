@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {UniqueLoginValidatorService} from "../validators/unique-login-validator.service";
-
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UniqueLoginValidatorService} from '../validators/unique-login-validator.service';
 
 
 @Component({
@@ -12,19 +11,19 @@ import {UniqueLoginValidatorService} from "../validators/unique-login-validator.
 export class InscriptionArtistComponent implements OnInit {
 
   @Output()
-  validationArtist:EventEmitter<FormGroup> = new EventEmitter();
-  clearForm:EventEmitter<FormGroup> = new EventEmitter();
+  validationArtist: EventEmitter<FormGroup> = new EventEmitter();
+  clearForm: EventEmitter<FormGroup> = new EventEmitter();
 
   nameArtistCtrl: FormControl;
   descriptionCtrl: FormControl;
   artistFormGroup: FormGroup;
 
 
-
   constructor(fb: FormBuilder, private uniqueLogin: UniqueLoginValidatorService) {
 
-    this.nameArtistCtrl = fb.control('', [Validators.required],[this.uniqueLogin.artistNameExists]);
-    this.descriptionCtrl = fb.control('', [Validators.required])
+    this.nameArtistCtrl = fb.control('', [Validators.required], [this.uniqueLogin.artistNameExists]);
+    this.descriptionCtrl = fb.control('', [Validators.required,
+      Validators.pattern('^[a-zA-Z0-9-\\_\\ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.!:;,\\(\\)]{3,}$')]);
 
     this.artistFormGroup = fb.group({
       nameArtist: this.nameArtistCtrl,
@@ -33,12 +32,12 @@ export class InscriptionArtistComponent implements OnInit {
 
   }
 
-  validateForm(event){
+  validateForm(event) {
 
     this.validationArtist.emit(this.artistFormGroup.value);
   }
 
-  handleClear(){
+  handleClear() {
     this.nameArtistCtrl.setValue('');
     this.descriptionCtrl.setValue('');
     this.clearForm.emit();
