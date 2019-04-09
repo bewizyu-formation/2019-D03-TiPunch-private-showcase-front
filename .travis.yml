@@ -32,7 +32,6 @@ before_script:
 script:
   - npm run lint
   - npm run ci:test
-  - npm run e2e
   - sonar-scanner
   - npm run build -- --aot --prod --build-optimizer --base-href /project-private-showcase-front/
 
