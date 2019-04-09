@@ -16,7 +16,7 @@
   <div class="buttonsDiv">
 
     <button (click)="handleClear()"class="btn-annulation" type="reset" mat-button>Annuler</button>
-    <button class="btn-validate" mat-button (click)="validateForm($event)">Valider</button>
+    <button class="btn-validate" mat-button (click)="validateForm($event)" [disabled]="artistFormGroup.invalid">Valider</button>
   </div>
 
 </div>

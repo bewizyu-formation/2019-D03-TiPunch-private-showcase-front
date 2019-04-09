@@ -58,7 +58,7 @@
     <ng-template #classicValidate>
       <div class="buttonsDiv">
         <button type="reset" (click)="handleClear()" class="btn-annulation" mat-button>Annuler</button>
-        <button class="btn-validate" mat-button type="submit">Valider</button>
+        <button class="btn-validate" mat-button type="submit" [disabled]="userForm.invalid">Valider</button>
       </div>
     </ng-template>
 

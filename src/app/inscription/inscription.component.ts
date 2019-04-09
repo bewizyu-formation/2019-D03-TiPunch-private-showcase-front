@@ -24,7 +24,6 @@ export class InscriptionComponent implements OnInit {
   userForm: FormGroup;
   passwordsGroup: FormGroup;
 
-  // options: string[] = ['paris', 'lyon', 'marseille', 'strasbourg'];
   options: string[] = [];
 
   constructor(fb: FormBuilder, private uniqueLogin: UniqueLoginValidatorService,
