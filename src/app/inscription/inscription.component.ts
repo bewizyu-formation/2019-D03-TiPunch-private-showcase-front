@@ -13,7 +13,7 @@ import {ArtistServicesService} from '../services/artist-services.service';
 export class InscriptionComponent implements OnInit {
 
   // champ de statut artist/user simple
-  displayArtistFields: boolean = false;
+  displayArtistFields = false;
 
   // différents champs users
   usernameCtrl: FormControl;

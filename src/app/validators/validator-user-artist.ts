@@ -13,7 +13,7 @@ export function passwordValid(passGroup: FormGroup) {
     result = null;
 
   } else {
-    console.log('marche pas !!')
+
     result = {passwordValid: true};
   }
 
