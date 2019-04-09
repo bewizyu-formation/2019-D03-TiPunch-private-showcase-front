@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { PATH_HOME, PATH_USER } from '../app.routes.constantes';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user-service/user.service';
-import { LoggedInGuard } from '../logged-in.guard';
-import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login',
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit {
   passwordCtrl: FormControl;
   userForm: FormGroup;
   error: boolean;
-  constructor(private router: Router, fb: FormBuilder, private userService: UserService, private guard: LoggedInGuard) {
+  constructor(private router: Router, fb: FormBuilder, private userService: UserService) {
     this.usernameCtrl = fb.control('', [Validators.required]);
     this.passwordCtrl = fb.control('', [Validators.required]);
     this.userForm = fb.group({

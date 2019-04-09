@@ -32,4 +32,14 @@ export class UserService {
         .catch((response: HttpResponse<any>) => { resolve(response.status); });
     });
   }
+
+  logged(username: string, password: string): Promise<any> {
+    return new Promise((resolve) => {
+      this.userRepository.login(username, password).toPromise()
+        .then((response: HttpResponse<any>) => {
+          this.token = response.headers.get('Authorization');
+          resolve(this.token);
+        });
+    });
+  }
 }
