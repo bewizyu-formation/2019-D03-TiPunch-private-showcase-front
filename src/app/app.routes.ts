@@ -34,14 +34,14 @@ export const ROUTES: Routes = [
         ]
     },
     {
-        path: PATH_EVENT, component: EventComponent,
+        path: PATH_EVENT, component: EventComponent, canActivate: [LoggedInGuard],
         children: [
             { path: ':id', component: EventDetailComponent, },
             { path: ':id/modification', component: EventModifComponent, }
         ]
     },
     {
-        path: PATH_ARTIST, component: ArtistComponent,
+        path: PATH_ARTIST, component: ArtistComponent, canActivate: [LoggedInGuard],
         children: [
             { path: ':id', component: ArtistDetailComponent, },
             { path: ':id/modification', component: ArtistModifComponent, }

@@ -28,7 +28,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatInputModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,6 +64,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     {provide: HTTP_INTERCEPTORS, useClass: CommonHeadersInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true},
+
   ],
   bootstrap: [AppComponent]
 })
