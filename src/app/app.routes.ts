@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import {
     PATH_HOME, PATH_ARTIST, PATH_USER, PATH_EVENT,
-    PATH_LOGIN, PATH_INSCRIPTION, PATH_PROFILE, PATH_INSCRIPTION_ARTIST
+    PATH_LOGIN, PATH_INSCRIPTION, PATH_PROFILE
 } from './app.routes.constantes';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
@@ -16,19 +16,15 @@ import { EventDetailComponent } from './event-detail/event-detail.component';
 import { EventModifComponent } from './event-modif/event-modif.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 import { ArtistModifComponent } from './artist-modif/artist-modif.component';
-import { InscriptionArtistComponent } from './inscription-artist/inscription-artist.component';
 import { LoggedInGuard } from './logged-in.guard';
 
 
 export const ROUTES: Routes = [
     { path: PATH_HOME, component: HomeComponent },
     { path: PATH_LOGIN, component: LoginComponent },
-    {
-        path: PATH_INSCRIPTION, component: InscriptionComponent,
-        children: [
-            { path: PATH_INSCRIPTION_ARTIST, component: InscriptionArtistComponent, },
-        ]
-    },
+
+    { path: PATH_INSCRIPTION, component: InscriptionComponent},
+
     { path: PATH_PROFILE, component: ProfileComponent },
     {
         path: PATH_USER, component: UserComponent, canActivate: [LoggedInGuard],

@@ -1,3 +1,23 @@
-<p>
-  inscription-artist works!
-</p>
+<div class="artistForm" [formGroup]="artistFormGroup">
+  <mat-form-field class="example-full-width">
+    <input matInput type="text" placeholder="Nom de l'artiste" value="" [formControl]="nameArtistCtrl">
+  </mat-form-field>
+  <div *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('required')">Le champ nom de l'artiste est obligatoire</div>
+  <div *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('uniqueLogin')">Ce nom d'artiste existe déjà</div>
+  <div *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('invalidLogin')">Le champ nom de l'artiste  n'est pas valide</div>
+
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Description de l'artiste" [formControl]="descriptionCtrl"></textarea>
+    <div *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('required')">Le champ description est obligatoire</div>
+    <div *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('pattern')">Le champ n'est pas valide</div>
+
+  </mat-form-field>
+
+  <div class="buttonsDiv">
+
+    <button (click)="handleClear()"class="btn-annulation" type="reset" mat-button>Annuler</button>
+    <button class="btn-validate" mat-button (click)="validateForm($event)" [disabled]="artistFormGroup.invalid">Valider</button>
+  </div>
+
+</div>
+
