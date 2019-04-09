@@ -9,14 +9,14 @@
   </div>
   <div class="bottom">
     <img src="../../assets/banni-re.jpg" srcset="../../assets/banni-re@2x.jpg 2x,
-       ../../assets/banni-re@3x.jpg 3x" class="Bannire">
+         ../../assets/banni-re@3x.jpg 3x" class="Bannire">
     <div class="Fond">
       <h3 class="title">Formulaire de connexion</h3>
-      <form class="formulaire-connexion" (ngSubmit)="handleSubmit()"  [formGroup]="userForm" >
-        <div style="color:red" *ngIf="this.error" >
+      <form class="formulaire-connexion" (ngSubmit)="handleSubmit()" [formGroup]="userForm">
+        <div style="color:red" *ngIf="this.error">
           le nom d'utilisateur ou le mot de passe est incorrect
         </div>
-        <mat-form-field class ="bounds">
+        <mat-form-field class="bounds">
           <input matInput placeholder="Identifiant" [formControl]="usernameCtrl" value="">
         </mat-form-field>
         <mat-form-field class="bounds">
@@ -27,7 +27,7 @@
             <button mat-button type="reset" (click)="Cancel()" class="button-bg-gris">Annuler</button>
           </span>
           <span>
-            <button mat-button type="submit" class="button-bg-vert"  [disabled]="userForm.invalid">Valider</button>
+            <button mat-button type="submit" class="button-bg-vert" [disabled]="userForm.invalid">Valider</button>
           </span>
         </div>
       </form>
