@@ -2,7 +2,9 @@
     width: 100%;
     height: auto;
     background-color: #9b9b9b;
-   
+    display: flex;
+    flex-direction:column;
+    align-content: center;
 }
 .app-bar-bg {
     width: 100%;
