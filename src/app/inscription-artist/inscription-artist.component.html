@@ -1,22 +1,24 @@
 <div class="artistForm" [formGroup]="artistFormGroup">
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="bounds">
     <input matInput type="text" placeholder="Nom de l'artiste" value="" [formControl]="nameArtistCtrl">
   </mat-form-field>
   <mat-error *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('required')">Le champ nom de l'artiste est obligatoire</mat-error>
   <mat-error *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('uniqueLogin')">Ce nom d'artiste existe déjà</mat-error>
   <mat-error *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('invalidLogin')">Le champ nom de l'artiste  n'est pas valide</mat-error>
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="bounds">
     <textarea matInput placeholder="Description de l'artiste" [formControl]="descriptionCtrl"></textarea>
     <mat-error *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('required')">Le champ description est obligatoire</mat-error>
     <mat-error *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('pattern')">Le champ n'est pas valide</mat-error>
 
   </mat-form-field>
-
-  <div class="buttonsDiv">
-
-    <button (click)="handleClear()"class="btn-annulation" type="reset" mat-button>Annuler</button>
-    <button class="btn-validate" mat-button (click)="validateForm($event)" [disabled]="artistFormGroup.invalid">Valider</button>
+  <div class="buttons">
+      <span>
+        <button mat-button type="reset" (click)="handleClear()" class="button-bg-gris">Annuler</button>
+      </span>
+      <span>
+        <button mat-button class="button-bg-vert" mat-button (click)="validateForm($event)" [disabled]="artistFormGroup.invalid">Valider</button>
+      </span>
   </div>
 
 </div>

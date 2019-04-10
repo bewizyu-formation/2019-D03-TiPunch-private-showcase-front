@@ -1,13 +1,3 @@
-.btn-annulation{
-  background-color: #4a4a4a;
-  color: white;
-  margin-right: 5px;
-}
-
-.btn-validate{
-  background-color: #17998c;
-  color: white;
-}
 
 .artistForm{
   display: flex;
@@ -15,12 +5,32 @@
   align-items: center;
   width: 100%;
 }
-.buttonsDiv{
-  display: inline;
-  width: 100%;
-  text-align: right;
-  margin-top: 10px;
+.button-bg-vert {
+  width: 93px;
+  height: 36px;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+  background-color: #17998c;
+  color:#ffffff;
+  margin-right: 5px;
+
 }
-.example-full-width {
-  width: 80%;
+.button-bg-gris {
+  width: 93px;
+  height: 36px;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+  background-color: #4a4a4a;
+  color:#ffffff;
+  margin-right: 2px;
+}
+.buttons{
+  width: 60%;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap-reverse;
+  margin-bottom: 18px;
+}
+.bounds {
+  width: 60%;
 }

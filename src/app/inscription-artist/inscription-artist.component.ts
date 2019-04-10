@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UniqueLoginValidatorService} from '../validators/unique-login-validator.service';
+import { Router } from '@angular/router';
+import { PATH_HOME } from '../app.routes.constantes';
 
 
 @Component({
