@@ -30,7 +30,8 @@ export class InscriptionComponent implements OnInit {
   options: string[] = [];
 
   constructor(fb: FormBuilder, private uniqueLogin: UniqueLoginValidatorService,
-    private userService: UserServicesService, private artistService: ArtistServicesService, private router: Router, private userServiceLogin: UserService, ) {
+    private userService: UserServicesService, private artistService: ArtistServicesService,
+    private router: Router, private userServiceLogin: UserService, ) {
 
     // mise en places des control avec les différents validator
     this.usernameCtrl = fb.control('', [Validators.required], [this.uniqueLogin.usernameExists]);

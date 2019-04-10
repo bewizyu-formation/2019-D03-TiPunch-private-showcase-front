@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {User} from '../model/User';
-import {Artist} from '../model/Artist';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../model/User';
+import { Artist } from '../model/Artist';
 
 const API_BASE_URL = 'http://localhost:8080';
 const API_USER = '/users/';
@@ -79,12 +79,12 @@ export class SpringApiServicesService {
 
       } else {
 
-        result = {uniqueLogin: true};
+        result = { uniqueLogin: true };
       }
 
     } else {
 
-      result = {invalidLogin: true};
+      result = { invalidLogin: true };
     }
     return result;
 
