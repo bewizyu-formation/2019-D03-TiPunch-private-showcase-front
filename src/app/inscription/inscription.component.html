@@ -1,66 +1,89 @@
-<div class="formDiv">
-  <h4>Formulaire d'inscription</h4>
-
-  <form (ngSubmit)="handleSubmit()" [formGroup]="userForm">
-    <mat-checkbox (change)="handleCheck($event)">Êtes vous un artiste proposant des prestations privées ?</mat-checkbox>
-    <mat-form-field class="example-full-width">
-      <input matInput type="text" placeholder="Identifiant" value="" [formControl]="usernameCtrl">
-    </mat-form-field>
-    <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('uniqueLogin')">Cet identifiant existe déjà</div>
-    <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('invalidLogin')">Le champ identifiant n'est pas valide</div>
-    <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('required')">Le champ identifiant est obligatoire</div>
-    <div class="divPwd" [formGroup]="passwordsGroup">
-      <mat-form-field class="example-full-width">
-        <input matInput type="password" placeholder="Mot de passe" value="" [formControl]="passwordCtrl">
-      </mat-form-field>
-      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">Le champ mot de passe est obligatoire</div>
-      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('pattern')">Le champ mot de passe  doit contenir 8 caractères (au moins une minuscule, une majuscule et un chiffre)</div>
-      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('passwordValid')">Les champs mot de passe doivent être
-        identiques
-      </div>
-
-
-      <mat-form-field class="example-full-width">
-        <input matInput type="password" placeholder="Confirmez le mot de passe" value="" [formControl]="password2Ctrl">
-      </mat-form-field>
-      <div *ngIf="password2Ctrl.dirty && password2Ctrl.hasError('required')">Le champ mot de passe est obligatoire</div>
+<div class="container">
+  <div class="app-bar-bg">
+    <div class="button-bg">
+      <a class="return" (click)="NavigateToHome()">&larr;</a>
     </div>
-
-    <mat-form-field class="example-full-width">
-      <input matInput type="email" placeholder="Email" value="" [formControl]="emailCtrl">
-    </mat-form-field>
-
-    <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">Le champ email n'est pas valide</div>
-    <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">Le champ email est obligatoire</div>
-
-    <div *ngIf="options.length != 0; else inputCity">
-      <mat-form-field class="example-full-width">
-        <input type="text" placeholder="Ville" aria-label="Number" matInput [formControl]="cityCtrl"
-               [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of options" [value]="option">
-            {{option}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+    <h1 class="Private-ShowCase">Private showcase</h1>
+    <div class="vide">
     </div>
-    <ng-template #inputCity>
-      <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ville" value="" [formControl]="cityCtrl">
-      </mat-form-field>
-    </ng-template>
-    <div *ngIf="cityCtrl.dirty && cityCtrl.hasError('required')">Le champ ville est obligatoire</div>
+  </div>
+  <div class="bottom">
+    <img src="../../assets/banni-re.jpg" srcset="../../assets/banni-re@2x.jpg 2x,
+           ../../assets/banni-re@3x.jpg 3x" class="Bannire">
+    <div class="Fond">
+      <h3 class="title" >Formulaire d'inscription</h3>
 
-    <div class="ifDiv" *ngIf="displayArtistFields; else classicValidate">
-      <app-inscription-artist (validationArtist)="handleArtistForm($event)"
-                              (clearForm)="handleClear()"></app-inscription-artist>
+      <form (ngSubmit)="handleSubmit()" [formGroup]="userForm" class="formulaire-d-inscription">
+        <mat-checkbox (change)="handleCheck($event)">Êtes vous un artiste proposant des prestations privées ?
+        </mat-checkbox>
+        <mat-form-field class="bounds">
+          <input matInput type="text" placeholder="Identifiant" value="" [formControl]="usernameCtrl">
+        </mat-form-field>
+        <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('uniqueLogin')">Cet identifiant existe déjà</div>
+        <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('invalidLogin')">Le champ identifiant n'est pas valide
+        </div>
+        <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('required')">Le champ identifiant est obligatoire</div>
+        <div class="divPwd" [formGroup]="passwordsGroup">
+          <mat-form-field class="bounds">
+            <input matInput type="password" placeholder="Mot de passe" value="" [formControl]="passwordCtrl">
+          </mat-form-field>
+          <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">Le champ mot de passe est obligatoire
+          </div>
+          <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('pattern')">Le champ mot de passe doit contenir 8
+            caractères (au moins une minuscule, une majuscule et un chiffre)</div>
+          <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('passwordValid')">Les champs mot de passe doivent être
+            identiques
+          </div>
+
+
+          <mat-form-field class="bounds">
+            <input matInput type="password" placeholder="Confirmez le mot de passe" value=""
+              [formControl]="password2Ctrl">
+          </mat-form-field>
+          <div *ngIf="password2Ctrl.dirty && password2Ctrl.hasError('required')">Le champ mot de passe est obligatoire
+          </div>
+        </div>
+
+        <mat-form-field class="bounds">
+          <input matInput type="email" placeholder="Email" value="" [formControl]="emailCtrl">
+        </mat-form-field>
+
+        <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">Le champ email n'est pas valide</div>
+        <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">Le champ email est obligatoire</div>
+
+        <div *ngIf="options.length != 0; else inputCity">
+          <mat-form-field class="bounds">
+            <input type="text" placeholder="Ville" aria-label="Number" matInput [formControl]="cityCtrl"
+              [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of options" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <ng-template #inputCity>
+          <mat-form-field class="bounds">
+            <input matInput type="text" placeholder="Ville" value="" [formControl]="cityCtrl">
+          </mat-form-field>
+        </ng-template>
+        <div *ngIf="cityCtrl.dirty && cityCtrl.hasError('required')">Le champ ville est obligatoire</div>
+
+        <div class="ifDiv" *ngIf="displayArtistFields; else classicValidate">
+          <app-inscription-artist (validationArtist)="handleArtistForm($event)" (clearForm)="handleClear()">
+          </app-inscription-artist>
+        </div>
+        <ng-template #classicValidate>
+            <div class="buttons">
+                <span>
+                  <button mat-button type="reset" (click)="handleClear()" class="button-bg-gris">Annuler</button>
+                </span>
+                <span>
+                  <button mat-button type="submit" class="button-bg-vert" [disabled]="userForm.invalid">Valider</button>
+                </span>
+            </div>
+        </ng-template>
+
+      </form>
     </div>
-    <ng-template #classicValidate>
-      <div class="buttonsDiv">
-        <button type="reset" (click)="handleClear()" class="btn-annulation" mat-button>Annuler</button>
-        <button class="btn-validate" mat-button type="submit" [disabled]="userForm.invalid">Valider</button>
-      </div>
-    </ng-template>
-
-  </form>
-</div>
+  </div>
