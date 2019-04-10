@@ -45,6 +45,7 @@
     padding-right: 3px;
   }
   .Welcome {
+    overflow-x: hidden;
     flex:auto;
     display:flex;
     flex-direction: column;

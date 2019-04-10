@@ -1,3 +1,56 @@
+.container{
+  width: 100%;
+  background-color: #9b9b9b;
+  display: flex;
+  flex-direction:column;
+  align-content: center;
+}
+.app-bar-bg {
+  width: 100%;
+  height: 64px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.24), 0 0 4px 0 rgba(0, 0, 0, 0.12);
+  background-color: #4a4a4a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+  font-family: Roboto;
+}
+.Private-ShowCase {
+  width: 290px;
+  height: 32px;
+  font-size: 36px;
+  line-height: 0.89;
+}
+.button-bg {
+  width: auto;
+  height: 36px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction:space-between;
+  cursor:  pointer;
+}
+.return{
+  font-size:30px;
+  margin-left: 5px;
+}
+.Bannire {
+  
+  width: auto;
+  height: 294px;
+  object-fit: contain;
+  margin-bottom: 50px;
+
+}
+.bottom{
+  overflow-x: hidden;
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
 .btn-annulation{
   background-color: #4a4a4a;
   color: white;
@@ -8,11 +61,16 @@
   background-color: #17998c;
   color: white;
 }
-
-.formDiv{
-
+.Fond {
+  flex-wrap: wrap;
   width: 50%;
-  min-height: 60%;
+  margin: 5%;
+  height: auto;
+  border-radius: 14px;
+  background-color: #e7e6e6;
+}
+.formDiv{
+  width: 50%;
   border-radius: 30px;
   background-color: #e7e6e6;
   display: flex;
@@ -20,44 +78,61 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: auto;
-  padding: 0px 20px 20px;
+  margin-bottom: 18px;
 }
 
 .divPwd{
   width: 100%;
-  padding: 0 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
 }
-
-form{
+.ifDiv{
+  width: 100%;
+}
+.formulaire-d-inscription{
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
 }
-
-.example-full-width{
-  width: 80%;
-  /*border-bottom: 1px solid rgba(0, 0, 0, 0.38);*/
-  /*color: rgba(0, 0, 0, 0.38);*/
-}
-
-h4{
+.title {
+  text-align: center;
+  width: 100%;
+  height: 28px;
+  font-family: Roboto;
   font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
   color: rgba(0, 0, 0, 0.54);
 }
-
-.ifDiv{
-  width: 100%;
+.button-bg-vert {
+  width: 93px;
+  height: 36px;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+  background-color: #17998c;
+  color:#ffffff;
+  margin-right: 5px;
 }
-
-.buttonsDiv{
-  display: inline;
-  width: 100%;
-  text-align: right;
-  margin-top: 10px;
+.button-bg-gris {
+  width: 93px;
+  height: 36px;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+  background-color: #4a4a4a;
+  color:#ffffff;
+  margin-right: 2px;
+}
+.buttons{
+  width: 60%;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap-reverse;
+  margin-bottom: 18px;
+}
+.bounds {
+  width: 60%;
 }
