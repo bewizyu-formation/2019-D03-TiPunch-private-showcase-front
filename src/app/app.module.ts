@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
 import {environment} from '../environments/environment';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -25,8 +24,17 @@ import {ArtistDetailComponent} from './artist-detail/artist-detail.component';
 import {ArtistModifComponent} from './artist-modif/artist-modif.component';
 import {InscriptionArtistComponent} from './inscription-artist/inscription-artist.component' ;
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatInputModule} from '@angular/material';
+import {
+  ErrorStateMatcher,
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDialogModule, MatIconModule,
+  MatInputModule, ShowOnDirtyErrorStateMatcher
+} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { DialogArtistComponent } from './dialog-artist/dialog-artist.component';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +53,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ArtistDetailComponent,
     ArtistModifComponent,
     InscriptionArtistComponent,
+    DialogArtistComponent,
 
   ],
   imports: [
@@ -57,16 +66,20 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [
     {provide: APP_CONFIG, useValue: environment},
     {provide: HTTP_INTERCEPTORS, useClass: CommonHeadersInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true},
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
 
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogArtistComponent]
 })
 export class AppModule {
 }

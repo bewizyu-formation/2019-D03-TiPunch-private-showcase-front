@@ -23,7 +23,7 @@ export class InscriptionArtistComponent implements OnInit {
 
     this.nameArtistCtrl = fb.control('', [Validators.required], [this.uniqueLogin.artistNameExists]);
     this.descriptionCtrl = fb.control('', [Validators.required,
-      Validators.pattern('^[a-zA-Z0-9-\\_\\ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.!:;,\\(\\)]{3,}$')]);
+      Validators.pattern("^[a-zA-Z0-9-\\_\\ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.!:;,\\(\\)\\']{3,}$")]);
 
     this.artistFormGroup = fb.group({
       nameArtist: this.nameArtistCtrl,

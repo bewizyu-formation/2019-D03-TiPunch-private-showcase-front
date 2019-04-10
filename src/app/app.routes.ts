@@ -41,7 +41,7 @@ export const ROUTES: Routes = [
         ]
     },
     {
-        path: PATH_ARTIST, component: ArtistComponent, canActivate: [LoggedInGuard],
+        path: PATH_ARTIST, component: ArtistComponent /*, canActivate: [LoggedInGuard]*/,
         children: [
             { path: ':id', component: ArtistDetailComponent, },
             { path: ':id/modification', component: ArtistModifComponent, }

@@ -1,3 +1,49 @@
-<p>
-  artist-detail works!
-</p>
+<div class="container">
+
+  <form><!--(ngSubmit)="handleSubmit()" [formGroup]="artistForm"-->
+
+    <h2>Presentation</h2>
+  <div class="presentation">
+    <img src="{{artist?.img_url}}" alt="">
+    <div class="text">
+      <h1>{{artist?.nameArtist}} <img class="pencil" src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('nameArtist')" >
+      </h1>
+      <div class="abstract">{{artist?.abstract}} <img class="pencil" src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('abstract')" >
+      </div>
+      <div class="description">{{artist?.descriptionArtist}}</div>
+      <img class="pencil" src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('descriptionArtist')">
+    </div>
+  </div>
+
+    <h2>Informations générales</h2>
+  <div class="infos">
+    <div class="contacts">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Site Web" value="{{artist?.website}}" [formControl]="websiteCtrl">
+        <mat-icon matPrefix>alternate_email</mat-icon>
+      </mat-form-field>
+
+      <mat-error *ngIf="websiteCtrl.dirty && websiteCtrl.hasError('pattern')">L'url doit être valide</mat-error>
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Téléphone" value="{{artist?.phoneNb}}" [formControl]="phoneCtrl">
+        <mat-icon matPreffix>phone</mat-icon>
+      </mat-form-field>
+      <mat-error *ngIf="phoneCtrl.dirty && phoneCtrl.hasError('pattern')">Le téléphone doit être valide</mat-error>
+
+
+      <mat-form-field class="example-full-width">
+        <input matInput type="email" placeholder="Email" value="{{artist?.mail}}" [formControl]="emailCtrl">
+        <mat-icon matPrefix>email</mat-icon>
+      </mat-form-field>
+
+      <mat-error *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">L'email doit être valide</mat-error>
+
+    </div>
+    <div class="location">
+
+    </div>
+  </div>
+
+  </form>
+
+</div>

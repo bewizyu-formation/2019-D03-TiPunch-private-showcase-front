@@ -6,34 +6,34 @@
     <mat-form-field class="example-full-width">
       <input matInput type="text" placeholder="Identifiant" value="" [formControl]="usernameCtrl">
     </mat-form-field>
-    <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('uniqueLogin')">Cet identifiant existe déjà</div>
-    <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('invalidLogin')">Le champ identifiant n'est pas valide</div>
-    <div *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('required')">Le champ identifiant est obligatoire</div>
+    <mat-error *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('uniqueLogin')">Cet identifiant existe déjà</mat-error>
+    <mat-error *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('invalidLogin')">Le champ identifiant n'est pas valide</mat-error>
+    <mat-error *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('required')">Le champ identifiant est obligatoire</mat-error>
     <div class="divPwd" [formGroup]="passwordsGroup">
       <mat-form-field class="example-full-width">
         <input matInput type="password" placeholder="Mot de passe" value="" [formControl]="passwordCtrl">
       </mat-form-field>
-      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">Le champ mot de passe est obligatoire</div>
-      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('pattern')">Le champ mot de passe  doit contenir 8 caractères (au moins une minuscule, une majuscule et un chiffre)</div>
-      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('passwordValid')">Les champs mot de passe doivent être
-        identiques
-      </div>
+      <mat-error *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('pattern')">Le champ mot de passe  doit contenir 8 caractères (au moins une minuscule, une majuscule et un chiffre)</mat-error>
+      <mat-error *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">Le champ mot de passe est obligatoire</mat-error>
+      <mat-error *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('passwordValid')">Les champs mot de passe doivent être identiques</mat-error>
 
 
       <mat-form-field class="example-full-width">
         <input matInput type="password" placeholder="Confirmez le mot de passe" value="" [formControl]="password2Ctrl">
       </mat-form-field>
-      <div *ngIf="password2Ctrl.dirty && password2Ctrl.hasError('required')">Le champ mot de passe est obligatoire</div>
+      <mat-error *ngIf="password2Ctrl.dirty && password2Ctrl.hasError('required')">Le champ mot de passe est obligatoire</mat-error>
+      <mat-error *ngIf="password2Ctrl.dirty && password2Ctrl.hasError('passwordValid')">Les champs mot de passe doivent être identiques</mat-error>
+
     </div>
 
     <mat-form-field class="example-full-width">
       <input matInput type="email" placeholder="Email" value="" [formControl]="emailCtrl">
     </mat-form-field>
 
-    <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">Le champ email n'est pas valide</div>
-    <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">Le champ email est obligatoire</div>
+    <mat-error *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">Le champ email n'est pas valide</mat-error>
+    <mat-error *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">Le champ email est obligatoire</mat-error>
 
-    <div *ngIf="options.length != 0; else inputCity">
+    <mat-error *ngIf="options.length != 0; else inputCity">
       <mat-form-field class="example-full-width">
         <input type="text" placeholder="Ville" aria-label="Number" matInput [formControl]="cityCtrl"
                [matAutocomplete]="auto">
@@ -43,13 +43,13 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-    </div>
+    </mat-error>
     <ng-template #inputCity>
       <mat-form-field class="example-full-width">
         <input matInput type="text" placeholder="Ville" value="" [formControl]="cityCtrl">
       </mat-form-field>
     </ng-template>
-    <div *ngIf="cityCtrl.dirty && cityCtrl.hasError('required')">Le champ ville est obligatoire</div>
+    <mat-error *ngIf="cityCtrl.dirty && cityCtrl.hasError('required')">Le champ ville est obligatoire</mat-error>
 
     <div class="ifDiv" *ngIf="displayArtistFields; else classicValidate">
       <app-inscription-artist (validationArtist)="handleArtistForm($event)"

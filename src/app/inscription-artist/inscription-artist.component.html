@@ -2,14 +2,14 @@
   <mat-form-field class="example-full-width">
     <input matInput type="text" placeholder="Nom de l'artiste" value="" [formControl]="nameArtistCtrl">
   </mat-form-field>
-  <div *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('required')">Le champ nom de l'artiste est obligatoire</div>
-  <div *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('uniqueLogin')">Ce nom d'artiste existe déjà</div>
-  <div *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('invalidLogin')">Le champ nom de l'artiste  n'est pas valide</div>
+  <mat-error *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('required')">Le champ nom de l'artiste est obligatoire</mat-error>
+  <mat-error *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('uniqueLogin')">Ce nom d'artiste existe déjà</mat-error>
+  <mat-error *ngIf="nameArtistCtrl.dirty && nameArtistCtrl.hasError('invalidLogin')">Le champ nom de l'artiste  n'est pas valide</mat-error>
 
   <mat-form-field class="example-full-width">
     <textarea matInput placeholder="Description de l'artiste" [formControl]="descriptionCtrl"></textarea>
-    <div *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('required')">Le champ description est obligatoire</div>
-    <div *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('pattern')">Le champ n'est pas valide</div>
+    <mat-error *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('required')">Le champ description est obligatoire</mat-error>
+    <mat-error *ngIf="descriptionCtrl.dirty && descriptionCtrl.hasError('pattern')">Le champ n'est pas valide</mat-error>
 
   </mat-form-field>
 
