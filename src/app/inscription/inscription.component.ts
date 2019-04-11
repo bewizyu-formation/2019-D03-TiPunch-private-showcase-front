@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { passwordValid } from '../validators/validator-user-artist';
-import { UniqueLoginValidatorService } from '../validators/unique-login-validator.service';
-import { UserServicesService } from '../services/user-services.service';
-import { ArtistServicesService } from '../services/artist-services.service';
-import { Router } from '@angular/router';
-import { PATH_HOME, PATH_USER, PATH_LOGIN } from '../app.routes.constantes';
-import { UserService } from '../user-service/user.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {passwordValid} from '../validators/validator-user-artist';
+import {UniqueLoginValidatorService} from '../validators/unique-login-validator.service';
+import {UserServicesService} from '../services/user-services.service';
+import {ArtistServicesService} from '../services/artist-services.service';
+import {Router} from '@angular/router';
+import {PATH_HOME, PATH_USER, PATH_LOGIN} from '../app.routes.constantes';
+import {UserService} from '../user-service/user.service';
 
 @Component({
   selector: 'app-inscription',
@@ -30,8 +30,8 @@ export class InscriptionComponent implements OnInit {
   options: string[] = [];
 
   constructor(fb: FormBuilder, private uniqueLogin: UniqueLoginValidatorService,
-    private userService: UserServicesService, private artistService: ArtistServicesService,
-    private router: Router, private userServiceLogin: UserService, ) {
+              private userService: UserServicesService, private artistService: ArtistServicesService,
+              private router: Router, private userServiceLogin: UserService,) {
 
     // mise en places des control avec les différents validator
     this.usernameCtrl = fb.control('', [Validators.required], [this.uniqueLogin.usernameExists]);
@@ -46,9 +46,9 @@ export class InscriptionComponent implements OnInit {
       password: this.passwordCtrl,
       passwordConfirm: this.password2Ctrl
     }, {
-        validator: passwordValid.bind(this)
+      validator: passwordValid.bind(this)
 
-      });
+    });
 
     // création d'un objet avec toute les données du formulaire
     this.userForm = fb.group({
@@ -74,10 +74,12 @@ export class InscriptionComponent implements OnInit {
         nameArtist: artistFormGroup.nameArtist
       };
       let value;
-      this.artistService.addArtist(data).then(resp => value = resp);
-      if (value !== null) {
-        this.router.navigate([PATH_LOGIN]);
-      }
+
+      this.artistService.addArtist(data).then(resp => value = resp.status).then(() => {
+        if (value == 200) {
+          this.router.navigate([PATH_LOGIN]);
+        }
+      });
     }
   }
 
@@ -85,13 +87,14 @@ export class InscriptionComponent implements OnInit {
   async handleSubmit() {
     let value;
     if (this.displayArtistFields === false) {
-      this.userService.addUser(this.userForm.value).then(resp => value = resp);
-      console.log(value);
-      if (value !== null) {
-        this.router.navigate([PATH_LOGIN]);
-      }
+      this.userService.addUser(this.userForm.value).then(resp => value = resp.status).then(() => {
+        if (value == 200) {
+          this.router.navigate([PATH_LOGIN]);
+        }
+      });
     }
   }
+
   // vides les champs users
   handleClear() {
     this.usernameCtrl.setValue('');
@@ -111,9 +114,11 @@ export class InscriptionComponent implements OnInit {
       this.displayArtistFields = false;
     }
   }
+
   NavigateToHome() {
     this.router.navigate([PATH_HOME]);
   }
+
   ngOnInit() {
   }
 

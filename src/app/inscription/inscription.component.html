@@ -13,6 +13,7 @@
     <div class="Fond">
       <h3 class="title">Formulaire d'inscription</h3>
 
+
       <form (ngSubmit)="handleSubmit()" [formGroup]="userForm" class="formulaire-d-inscription">
         <mat-checkbox (change)="handleCheck($event)">Êtes vous un artiste proposant des prestations privées ?
         </mat-checkbox>
@@ -27,6 +28,7 @@
         <mat-error *ngIf="usernameCtrl.dirty && usernameCtrl.hasError('required')">Le champ identifiant est
           obligatoire
         </mat-error>
+
         <div class="divPwd" [formGroup]="passwordsGroup">
           <mat-form-field class="bounds">
             <input matInput type="password" placeholder="Mot de passe" value="" [formControl]="passwordCtrl">
@@ -36,6 +38,7 @@
           </mat-error>
           <mat-error *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('pattern')">Le champ mot de passe doit contenir 8 caractères (au moins une minuscule, une majuscule et un chiffre)
           </mat-error>
+
 
           <mat-form-field class="bounds">
             <input matInput type="password" placeholder="Confirmez le mot de passe" value=""
@@ -79,10 +82,12 @@
             </app-inscription-artist>
           </div>
           <ng-template #classicValidate>
+
             <div class="buttons">
                 <span>
                   <button mat-button type="reset" (click)="handleClear()" class="button-bg-gris">Annuler</button>
                 </span>
+
               <span>
                   <button mat-button type="submit" class="button-bg-vert" [disabled]="userForm.invalid">Valider</button>
                 </span>
@@ -91,3 +96,4 @@
       </form>
     </div>
   </div>
+

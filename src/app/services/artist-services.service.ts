@@ -9,11 +9,11 @@ export class ArtistServicesService {
   constructor(private ApiService: SpringApiServicesService) { }
 
 
-  async addArtist(data: any): Promise<boolean> {
-    let resp;
-    this.ApiService.addArtist(data).toPromise().then(p => resp = p);
 
-    return resp;
+  async addArtist(data: any): Promise<any> {
+    let resp;
+    await this.ApiService.addArtist(data).toPromise().then(p => resp = p,p => resp = p);
+    return await resp;
 
   }
 }

@@ -20,6 +20,9 @@
   width: 290px;
   height: 32px;
   font-size: 36px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
   line-height: 0.89;
 }
 .button-bg {
@@ -37,7 +40,7 @@
   margin-left: 5px;
 }
 .Bannire {
-  
+
   width: auto;
   height: 294px;
   object-fit: contain;
@@ -132,7 +135,11 @@
   justify-content: flex-end;
   flex-wrap: wrap-reverse;
   margin-bottom: 18px;
+
 }
 .bounds {
   width: 60%;
+}
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #17998c;
 }
