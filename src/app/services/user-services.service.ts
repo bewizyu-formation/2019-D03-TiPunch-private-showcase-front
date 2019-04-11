@@ -13,10 +13,11 @@ export class UserServicesService {
 
   user: User;
   async addUser(newUser: User): Promise<any> {
-    /*let resp;
-    this.ApiService.addUser(newUser).toPromise().then(p => resp = p);
-    console.log(resp);*/
-    return this.ApiService.addUser(newUser);
+    let resp;
+    await this.ApiService.addUser(newUser).toPromise().then(p => resp = p,p=>resp = p
+    );
+    await console.log(resp);
+    return await resp;
 
   }
 }

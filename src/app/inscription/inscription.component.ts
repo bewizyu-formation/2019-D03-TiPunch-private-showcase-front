@@ -74,22 +74,23 @@ export class InscriptionComponent implements OnInit {
         nameArtist: artistFormGroup.nameArtist
       };
       let value;
-      this.artistService.addArtist(data).then(resp => value = resp);
-      if (value !== null) {
-        this.router.navigate([PATH_LOGIN]);
-      }
-    }
+      this.artistService.addArtist(data).then(resp => value = resp.status).then(()=>{
+        if (value == 200) {
+          this.router.navigate([PATH_LOGIN]);
+        }
+      });      
   }
+}
 
   // Appellé si on créer un simple user
   async handleSubmit() {
     let value;
     if (this.displayArtistFields === false) {
-      this.userService.addUser(this.userForm.value).then(resp => value = resp);
-      console.log(value);
-      if (value !== null) {
-        this.router.navigate([PATH_LOGIN]);
-      }
+      this.userService.addUser(this.userForm.value).then(resp => value = resp.status).then(()=>{
+        if (value == 200) {
+          this.router.navigate([PATH_LOGIN]);
+        }
+      });      
     }
   }
   // vides les champs users

@@ -40,7 +40,6 @@
   margin-left: 5px;
 }
 .Bannire {
-  
   width: auto;
   height: 294px;
   object-fit: contain;
@@ -138,4 +137,7 @@
 }
 .bounds {
   width: 60%;
+}
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #17998c;
 }
