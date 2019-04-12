@@ -10,8 +10,7 @@ export class UserService {
   /**
    * Authentification JWT Token
    */
-  public token: string;
-
+  public token = localStorage.getItem('token') || undefined;
   constructor(private userRepository: UserRepository) {
   }
 
@@ -27,6 +26,7 @@ export class UserService {
         .toPromise()
         .then((response: HttpResponse<any>) => {
           this.token = response.headers.get('Authorization');
+          localStorage.setItem('token', this.token);
           resolve(response.status);
         })
         .catch((response: HttpResponse<any>) => { resolve(response.status); });
