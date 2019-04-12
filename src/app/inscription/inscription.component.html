@@ -11,7 +11,7 @@
     <img src="../../assets/banni-re.jpg" srcset="../../assets/banni-re@2x.jpg 2x,
            ../../assets/banni-re@3x.jpg 3x" class="Bannire">
     <div class="Fond">
-      <h3 class="title" >Formulaire d'inscription</h3>
+      <h3 class="title">Formulaire d'inscription</h3>
 
       <form (ngSubmit)="handleSubmit()" [formGroup]="userForm" class="formulaire-d-inscription">
         <mat-checkbox (change)="handleCheck($event)">Êtes vous un artiste proposant des prestations privées ?
@@ -51,19 +51,19 @@
         <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">Le champ email n'est pas valide</div>
         <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">Le champ email est obligatoire</div>
 
-        <div *ngIf="options.length != 0; else inputCity">
-          <mat-form-field class="bounds">
+        <div *ngIf="autocompleteCity; else inputCity" class="bounds">
+          <mat-form-field class="city">
             <input type="text" placeholder="Ville" aria-label="Number" matInput [formControl]="cityCtrl"
               [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of options" [value]="option">
-                {{option}}
+            <mat-autocomplete #auto="matAutocomplete" class="bounds">
+              <mat-option *ngFor="let option of options" [value]="option.nom">
+                {{option.nom}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
         </div>
         <ng-template #inputCity>
-          <mat-form-field class="bounds">
+          <mat-form-field class="city">
             <input matInput type="text" placeholder="Ville" value="" [formControl]="cityCtrl">
           </mat-form-field>
         </ng-template>
@@ -74,14 +74,14 @@
           </app-inscription-artist>
         </div>
         <ng-template #classicValidate>
-            <div class="buttons">
-                <span>
-                  <button mat-button type="reset" (click)="handleClear()" class="button-bg-gris">Annuler</button>
-                </span>
-                <span>
-                  <button mat-button type="submit" class="button-bg-vert" [disabled]="userForm.invalid">Valider</button>
-                </span>
-            </div>
+          <div class="buttons">
+            <span>
+              <button mat-button type="reset" (click)="handleClear()" class="button-bg-gris">Annuler</button>
+            </span>
+            <span>
+              <button mat-button type="submit" class="button-bg-vert" [disabled]="userForm.invalid">Valider</button>
+            </span>
+          </div>
         </ng-template>
 
       </form>

@@ -5,8 +5,9 @@ import { UniqueLoginValidatorService } from '../validators/unique-login-validato
 import { UserServicesService } from '../services/user-services.service';
 import { ArtistServicesService } from '../services/artist-services.service';
 import { Router } from '@angular/router';
-import { PATH_HOME, PATH_USER, PATH_LOGIN } from '../app.routes.constantes';
+import { PATH_HOME, PATH_LOGIN } from '../app.routes.constantes';
 import { UserService } from '../user-service/user.service';
+import {GeoServicesService} from '../services/geo-services.service';
 
 @Component({
   selector: 'app-inscription',
@@ -17,6 +18,10 @@ export class InscriptionComponent implements OnInit {
 
   // champ de statut artist/user simple
   displayArtistFields = false;
+  autocompleteCity = true;
+
+  // Relatif a l'autocomplete
+  options: any[] = [];
 
   // différents champs users
   usernameCtrl: FormControl;
@@ -27,11 +32,10 @@ export class InscriptionComponent implements OnInit {
   userForm: FormGroup;
   passwordsGroup: FormGroup;
 
-  options: string[] = [];
 
   constructor(fb: FormBuilder, private uniqueLogin: UniqueLoginValidatorService,
     private userService: UserServicesService, private artistService: ArtistServicesService,
-    private router: Router, private userServiceLogin: UserService, ) {
+    private router: Router, private userServiceLogin: UserService, private geoService: GeoServicesService ) {
 
     // mise en places des control avec les différents validator
     this.usernameCtrl = fb.control('', [Validators.required], [this.uniqueLogin.usernameExists]);
@@ -114,7 +118,19 @@ export class InscriptionComponent implements OnInit {
   NavigateToHome() {
     this.router.navigate([PATH_HOME]);
   }
+
+  // Relatif a l'autocomplete
+  private _filter(name: string): string[] {
+    const filterValue = name.toLowerCase();
+
+    return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+  }
+
   ngOnInit() {
+
+    this.cityCtrl.valueChanges.subscribe(value => {
+      this.geoService.getCities(value).then((data: any[]) => this.options =  data);
+    });
   }
 
 }
