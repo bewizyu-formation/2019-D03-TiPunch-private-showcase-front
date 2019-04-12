@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../model/User';
-import { Artist } from '../model/Artist';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {User} from '../model/User';
+import {Artist} from '../model/Artist';
 
 const API_BASE_URL = 'http://localhost:8080';
 const API_USER = '/users/';
 const API_ARTIST = 'artist/';
+const API_CITIES = '/communes/';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,6 @@ export class SpringApiServicesService {
   }
 
   // Appels api User
-
 
 
   addUser(user: User) {
@@ -79,15 +80,19 @@ export class SpringApiServicesService {
 
       } else {
 
-        result = { uniqueLogin: true };
+        result = {uniqueLogin: true};
       }
 
     } else {
 
-      result = { invalidLogin: true };
+      result = {invalidLogin: true};
     }
     return result;
+  }
 
+  getCities(name: string) {
+
+    return this.http.get(`${API_BASE_URL}${API_CITIES}${'?nom='}${name}`).toPromise();
 
   }
 }

@@ -51,13 +51,13 @@
         <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">Le champ email n'est pas valide</div>
         <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">Le champ email est obligatoire</div>
 
-        <div *ngIf="options.length != 0; else inputCity">
+        <div *ngIf="autocompleteCity; else inputCity">
           <mat-form-field class="bounds">
             <input type="text" placeholder="Ville" aria-label="Number" matInput [formControl]="cityCtrl"
               [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of options" [value]="option">
-                {{option}}
+              <mat-option *ngFor="let option of options" [value]="option.nom">
+                {{option.nom}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
