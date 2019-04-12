@@ -25,7 +25,7 @@ import {ArtistDetailComponent} from './artist-detail/artist-detail.component';
 import {ArtistModifComponent} from './artist-modif/artist-modif.component';
 import {InscriptionArtistComponent} from './inscription-artist/inscription-artist.component' ;
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatInputModule} from '@angular/material';
+import {MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatMenuModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
@@ -57,7 +57,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatMenuModule
   ],
   providers: [
     {provide: APP_CONFIG, useValue: environment},
