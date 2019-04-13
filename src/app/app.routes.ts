@@ -15,7 +15,6 @@ import { UserModifComponent } from './user-modif/user-modif.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { EventModifComponent } from './event-modif/event-modif.component';
 import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
-import { ArtistModifComponent } from './artist-modif/artist-modif.component';
 import { LoggedInGuard } from './logged-in.guard';
 
 
@@ -44,7 +43,6 @@ export const ROUTES: Routes = [
         path: PATH_ARTIST, component: ArtistComponent /*, canActivate: [LoggedInGuard]*/,
         children: [
             { path: ':id', component: ArtistDetailComponent, },
-            { path: ':id/modification', component: ArtistModifComponent, }
         ]
     }
 

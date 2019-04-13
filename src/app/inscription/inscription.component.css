@@ -140,6 +140,16 @@
 .bounds {
   width: 60%;
 }
+/*::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #17998c;
+}*/
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
   border-color: #17998c;
+  width: 18px;
+  height: 18px;
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+  background-color: #17998c !important;
+  width: 18px;
+  height: 18px;
 }

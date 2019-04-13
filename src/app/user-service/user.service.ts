@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { UserRepository } from './user.repository';
 import { HttpResponse } from '@angular/common/http';
+import {User} from '../model/User';
+import {SpringApiServicesService} from '../services/spring-api-services.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,9 @@ export class UserService {
    * Authentification JWT Token
    */
   public token: string;
+  public user: any;
 
-  constructor(private userRepository: UserRepository) {
+  constructor(private userRepository: UserRepository, private springApi: SpringApiServicesService) {
   }
 
   /**
@@ -29,6 +32,9 @@ export class UserService {
           this.token = response.headers.get('Authorization');
           resolve(response.status);
         })
+        .then(() => {this.user = this.springApi.getOneUser();
+        console.log('getOneUser', this.user);
+        resolve(null)})
         .catch((response: HttpResponse<any>) => { resolve(response.status); });
     });
   }

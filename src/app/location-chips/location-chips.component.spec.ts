@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArtistModifComponent } from './artist-modif.component';
+import { LocationChipsComponent } from './location-chips.component';
 
-describe('ArtistModifComponent', () => {
-  let component: ArtistModifComponent;
-  let fixture: ComponentFixture<ArtistModifComponent>;
+describe('LocationChipsComponent', () => {
+  let component: LocationChipsComponent;
+  let fixture: ComponentFixture<LocationChipsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArtistModifComponent ]
+      declarations: [ LocationChipsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArtistModifComponent);
+    fixture = TestBed.createComponent(LocationChipsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

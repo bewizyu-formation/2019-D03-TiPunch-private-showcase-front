@@ -1,17 +1,19 @@
-<h2 mat-dialog-title>{{fieldName}}</h2>
+<h2 mat-dialog-title>{{title}}</h2>
 
 <mat-dialog-content [formGroup]="form">
 
-  <mat-form-field>
-    <input matInput
+  <mat-form-field class="example-full-width">
+    <textarea matInput
            placeholder="{{title}}"
-           [formControl]="title">
+               [formControl]="contentCtrl"></textarea>
   </mat-form-field>
+  <mat-error *ngIf="contentCtrl.dirty && contentCtrl.hasError('pattern')">Le champ doit être valide</mat-error>
+  <mat-error *ngIf="artistName && contentCtrl.dirty && contentCtrl.hasError('uniqueLogin')">Le nom d'artiste doit être unique</mat-error>
 
 
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button (click)="close()">Close</button>
-  <button mat-button (click)="save()">Save</button>
+  <button mat-button (click)="close()">Fermer</button>
+  <button mat-button (click)="save()">Valider</button>
 </mat-dialog-actions>

@@ -10,7 +10,8 @@ export class Artist {
     public descriptionArtist: string,
     public noteArtist: string,
     public nbVotes: string,
-    public users: Array<User>
+    public users: Array<User>,
+    public counties: Array<string>,
   ) {
   }
 }

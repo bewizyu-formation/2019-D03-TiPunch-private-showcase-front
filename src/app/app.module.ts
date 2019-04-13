@@ -21,19 +21,19 @@ import {EventModifComponent} from './event-modif/event-modif.component';
 import {UserModifComponent} from './user-modif/user-modif.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {ArtistDetailComponent} from './artist-detail/artist-detail.component';
-import {ArtistModifComponent} from './artist-modif/artist-modif.component';
 import {InscriptionArtistComponent} from './inscription-artist/inscription-artist.component' ;
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   ErrorStateMatcher,
   MatAutocompleteModule,
   MatButtonModule,
-  MatCheckboxModule,
+  MatCheckboxModule, MatChipsModule,
   MatDialogModule, MatIconModule,
   MatInputModule, ShowOnDirtyErrorStateMatcher
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DialogArtistComponent } from './dialog-artist/dialog-artist.component';
+import { LocationChipsComponent } from './location-chips/location-chips.component';
 
 
 @NgModule({
@@ -51,9 +51,9 @@ import { DialogArtistComponent } from './dialog-artist/dialog-artist.component';
     UserModifComponent,
     UserDetailComponent,
     ArtistDetailComponent,
-    ArtistModifComponent,
     InscriptionArtistComponent,
     DialogArtistComponent,
+    LocationChipsComponent,
 
   ],
   imports: [
@@ -68,7 +68,9 @@ import { DialogArtistComponent } from './dialog-artist/dialog-artist.component';
     MatInputModule,
     MatAutocompleteModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatChipsModule,
+    MatAutocompleteModule
   ],
   providers: [
     {provide: APP_CONFIG, useValue: environment},

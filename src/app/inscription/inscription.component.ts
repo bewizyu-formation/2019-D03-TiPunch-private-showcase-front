@@ -28,10 +28,12 @@ export class InscriptionComponent implements OnInit {
   passwordsGroup: FormGroup;
 
   options: string[] = [];
+  
 
   constructor(fb: FormBuilder, private uniqueLogin: UniqueLoginValidatorService,
               private userService: UserServicesService, private artistService: ArtistServicesService,
-              private router: Router, private userServiceLogin: UserService,) {
+              private router: Router, private userServiceLogin: UserService) {
+
 
     // mise en places des control avec les différents validator
     this.usernameCtrl = fb.control('', [Validators.required], [this.uniqueLogin.usernameExists]);
@@ -82,6 +84,7 @@ export class InscriptionComponent implements OnInit {
       });
     }
   }
+
 
   // Appellé si on créer un simple user
   async handleSubmit() {
