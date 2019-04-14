@@ -45,20 +45,20 @@
             obligatoire
           </mat-error>
         </div>
-        <mat-form-field class="bounds">
+          <mat-form-field class="bounds">
             <input matInput type="email" placeholder="Email" value="" [formControl]="emailCtrl">
           </mat-form-field>
           <mat-error *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">Le champ email n'est pas valide</mat-error>
           <mat-error *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">Le champ email est obligatoire</mat-error>
-        <div class="buttons">
-          <span>
-            <button mat-button type="reset" (click)="handleClear()" class="button-bg-gris">Annuler</button>
-          </span>
-          <span>
-            <button mat-button type="submit" class="button-bg-vert" [disabled]="userForm.invalid">Valider</button>
-          </span>
-        </div>
-      </form>
+          <div class="buttons">
+            <span>
+              <button mat-button type="reset" (click)="handleClear()" class="button-bg-gris">Annuler</button>
+            </span>
+            <span>
+              <button mat-button type="submit" class="button-bg-vert" [disabled]="userForm.invalid">Valider</button>
+            </span>
+          </div>
+        </form>
     </div>
   </div>
 
