@@ -30,13 +30,7 @@ export class SpringApiServicesService {
   }
 
   async getOneUser() {
-
-    let data: any;
-
-    data = await this.http.get(`${API_BASE_URL}${API_USER}${'getUser'}`).toPromise().then(p => data = p);
-
-    console.log('data', data);
-    return data;
+    return this.http.get(`${API_BASE_URL}${API_USER}${'getUser'}`).toPromise();
   }
 
   // Appels Api Artists
