@@ -70,7 +70,7 @@ allowedToModify =true;
     // configuration de base
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '50%';
+    dialogConfig.width = '70%';
 
     let title: string;
     let fieldName: string;
