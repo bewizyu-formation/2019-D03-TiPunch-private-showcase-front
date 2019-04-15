@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserRepository } from './user.repository';
 import { HttpResponse } from '@angular/common/http';
-import {User} from '../model/User';
 import {SpringApiServicesService} from '../services/spring-api-services.service';
 import {reject} from 'q';
 

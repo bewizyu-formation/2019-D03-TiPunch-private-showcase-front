@@ -159,9 +159,9 @@ allowedToModify =true;
     };
 
 
-    //this.artistService.updateArtist(data);
+    this.artistService.updateArtist(data);
 
-    console.log('formulaire final :', data);
+   // console.log('formulaire final :', data);
   }
 
   disableForm() {
