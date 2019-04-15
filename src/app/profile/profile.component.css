@@ -107,3 +107,6 @@
     object-fit: contain;
     margin-bottom: 50px;
   }
+  .error{
+    font-size:10px;
+  }
