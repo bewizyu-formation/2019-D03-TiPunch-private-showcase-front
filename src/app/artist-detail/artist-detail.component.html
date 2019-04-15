@@ -9,48 +9,69 @@
   </div>
   <div class="bottom">
 
-    <form [formGroup]="artistForm"><!--(ngSubmit)="handleSubmit()" [formGroup]="artistForm"-->
+    <form [formGroup]="artistForm" class="bottom">
+      <!--(ngSubmit)="handleSubmit()" [formGroup]="artistForm"-->
 
-      <h2>Presentation</h2>
-      <div class="presentation">
-        <img src="{{artist?.img_url}}" alt="">
+      <h2 class="Informations-gnrales">Presentation</h2>
+      <div class="Rectangle">
+        <img class="image-placeholder" src="{{artist?.img_url}}" alt="">
         <div class="text">
-          <h3>{{artist?.nameArtist}} <img *ngIf="allowedToModify" class="pencil" src="../../assets/mode-edit.svg"
-                                          alt="pencil" (click)="openDialog('nameArtist')">
+          <h3 class="Nom-de-lartiste">{{artist?.nameArtist}} <img *ngIf="allowedToModify" class="pencil"
+              src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('nameArtist')">
           </h3>
-          <div class="abstract">{{artist?.abstract}} <img *ngIf="allowedToModify" class="pencil"
-                                                          src="../../assets/mode-edit.svg" alt="pencil"
-                                                          (click)="openDialog('abstract')">
+          <div class="Description-courte">{{artist?.abstract}} <img *ngIf="allowedToModify" class="pencil"
+              src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('abstract')">
           </div>
-          <div class="description">{{artist?.descriptionArtist}}</div>
-          <img *ngIf="allowedToModify" class="pencil" src="../../assets/mode-edit.svg" alt="pencil"
-               (click)="openDialog('descriptionArtist')">
+          <div class="description-longue">
+            <span class="description-longue-texte">{{artist?.descriptionArtist}}</span>
+            <span><img *ngIf="allowedToModify" class="pencil" src="../../assets/mode-edit.svg" alt="pencil"
+                (click)="openDialog('descriptionArtist')"></span>
+
+          </div>
         </div>
       </div>
 
-      <h2>Informations générales</h2>
-      <div class="infos">
+      <h2 class="Informations-gnrales">Informations générales</h2>
+      <div class="Rectangle">
         <div class="contacts" *ngIf="allowedToModify; else modificationAllowed">
-          <mat-form-field class="example-full-width">
-            <input matInput type="text" placeholder="Site Web" value="{{artist?.website}}" [formControl]="websiteCtrl">
-            <mat-icon matPrefix>alternate_email</mat-icon>
-          </mat-form-field>
-
-          <mat-error *ngIf="websiteCtrl.dirty && websiteCtrl.hasError('pattern')">L'url doit être valide</mat-error>
-          <mat-form-field class="example-full-width">
-            <input matInput type="text" placeholder="Téléphone" value="{{artist?.phoneNb}}" [formControl]="phoneCtrl"
-                   [disabled]="!allowedToModify">
-            <mat-icon matPreffix>phone</mat-icon>
-          </mat-form-field>
-          <mat-error *ngIf="phoneCtrl.dirty && phoneCtrl.hasError('pattern')">Le téléphone doit être valide</mat-error>
-
-
-          <mat-form-field class="example-full-width">
-            <input matInput type="email" placeholder="Email" value="{{artist?.mailArtist}}" [formControl]="emailCtrl">
-            <mat-icon matPrefix>email</mat-icon>
-          </mat-form-field>
-
-          <mat-error *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">L'email doit être valide</mat-error>
+          <div class="bounds">
+            <span class="icon">
+              <mat-icon matPrefix>alternate_email</mat-icon>
+            </span>
+            <span>
+              <mat-form-field class="input">
+                <input matInput type="text" placeholder="Site Web" value="{{artist?.website}}"
+                  [formControl]="websiteCtrl">
+                <mat-error *ngIf="websiteCtrl.dirty && websiteCtrl.hasError('pattern')">L'url doit être valide
+                </mat-error>
+              </mat-form-field>
+            </span>
+          </div>
+          <div class="bounds">
+            <span class="icon">
+              <mat-icon matPreffix>phone</mat-icon>
+            </span>
+            <span>
+              <mat-form-field class="input">
+                <input matInput type="text" placeholder="Téléphone" value="{{artist?.phoneNb}}"
+                  [formControl]="phoneCtrl" [disabled]="!allowedToModify">
+                <mat-error *ngIf="phoneCtrl.dirty && phoneCtrl.hasError('pattern')">Le téléphone doit être valide
+                </mat-error>
+              </mat-form-field>
+            </span>
+          </div>
+          <div class="bounds">
+            <span class="icon">
+              <mat-icon matPrefix>email</mat-icon>
+            </span>
+            <span>
+              <mat-form-field class="input">
+                <input matInput type="email" placeholder="Email" value="{{artist?.mailArtist}}"
+                  [formControl]="emailCtrl">
+                <mat-error *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">L'email doit être valide</mat-error>
+              </mat-form-field>
+            </span>
+          </div>
 
         </div>
         <ng-template #modificationAllowed>
@@ -69,12 +90,15 @@
             </div>
           </div>
         </ng-template>
-        <div class="location">
-          <app-location-chips [counties]="artist.counties"></app-location-chips>
+        <div class="baisser-le-bouton">
+          <div class="location">
+            <h5 class="Slctionnez-les-d">Séléctionnez le(s) département(s) pour vos concerts :</h5>
+            <app-location-chips [counties]="artist.counties"></app-location-chips>
+          </div>
+          <div *ngIf="allowedToModify">
+            <button mat-button class="button-bg-vert" mat-button (click)="handleSubmit()">Sauvegarder</button>
+          </div>
         </div>
-        <span *ngIf="allowedToModify">
-        <button mat-button class="button-bg-vert" mat-button (click)="handleSubmit()">Sauvegarder</button>
-      </span>
       </div>
 
     </form>
