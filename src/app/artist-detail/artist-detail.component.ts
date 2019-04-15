@@ -175,7 +175,6 @@ allowedToModify =true;
     });
 
      const pouet = this.artistService.getArtist(id);
-    console.log(pouet);
 
 
   }

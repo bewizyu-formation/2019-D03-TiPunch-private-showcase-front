@@ -3,6 +3,7 @@ import { UserRepository } from './user.repository';
 import { HttpResponse } from '@angular/common/http';
 import {User} from '../model/User';
 import {SpringApiServicesService} from '../services/spring-api-services.service';
+import {reject} from 'q';
 
 @Injectable({
   providedIn: 'root'
@@ -32,11 +33,14 @@ export class UserService {
           this.token = response.headers.get('Authorization');
           resolve(response.status);
         })
-        .then(() => {this.user = this.springApi.getOneUser();
-        console.log('getOneUser', this.user);
-        resolve(null)})
-        .catch((response: HttpResponse<any>) => { resolve(response.status); });
+
+        .catch((response: HttpResponse<any>) => { reject(response.status); });
     });
+  }
+
+  getUser() {
+    this.springApi.getOneUser().then(p => this.user = p);
+    console.log('getOneUser', this.user);
   }
 
   logged(username: string, password: string): Promise<any> {

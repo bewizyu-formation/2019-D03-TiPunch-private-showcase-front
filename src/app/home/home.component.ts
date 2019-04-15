@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PATH_LOGIN, PATH_INSCRIPTION } from '../app.routes.constantes';
+import {PATH_LOGIN, PATH_INSCRIPTION, PATH_ARTIST} from '../app.routes.constantes';
 
 
 @Component({
@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   NavigateToInscription() {
     this.router.navigate([PATH_INSCRIPTION]);
   }
+
 
   ngOnInit() {
   }

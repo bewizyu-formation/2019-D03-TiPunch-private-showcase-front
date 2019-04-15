@@ -29,9 +29,14 @@ export class SpringApiServicesService {
     // return this.http.put(`${API_BASE_URL}${API_USER}${user.id}`, user);
   }
 
-  getOneUser() {
+  async getOneUser() {
 
-    return this.http.get(`${API_BASE_URL}${API_USER}'getUser'`);
+    let data: any;
+
+    data = await this.http.get(`${API_BASE_URL}${API_USER}${'getUser'}`).toPromise().then(p => data = p);
+
+    console.log('data', data);
+    return data;
   }
 
   // Appels Api Artists
@@ -42,14 +47,14 @@ export class SpringApiServicesService {
     // return this.http.get(`${API_BASE_URL}${API_ARTIST}`);
   }
 
-  getOneArtist(id: number, token: string) {
+  getOneArtist(id: string) {
 
-    const data: any = {
+/*    const data: any = {
       id: id,
-      token: token,
-    };
 
-    return this.http.put(`${API_BASE_URL}${API_ARTIST}`, data);
+    };*/
+
+    return this.http.get(`${API_BASE_URL}${'/artists/'}${id}`).toPromise();
   }
 
   addArtist(data: any) {

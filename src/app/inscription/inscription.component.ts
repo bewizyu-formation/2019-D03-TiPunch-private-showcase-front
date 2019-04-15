@@ -69,12 +69,15 @@ export class InscriptionComponent implements OnInit {
 
       const data = {
         username: this.usernameCtrl.value,
-        passwordArtist: this.passwordCtrl.value,
-        mailArtist: this.emailCtrl.value,
-        cityArtist: this.cityCtrl.value,
-        descriptionArtist: artistFormGroup.description,
-        nameArtist: artistFormGroup.nameArtist
+        password: this.passwordCtrl.value,
+        mail: this.emailCtrl.value,
+        city: this.cityCtrl.value,
+        artist:  {
+          descriptionArtist: artistFormGroup.description,
+          nameArtist: artistFormGroup.nameArtist
+        }
       };
+      console.log('data Inscrip', data);
       let value;
 
       this.artistService.addArtist(data).then(resp => value = resp.status).then(() => {

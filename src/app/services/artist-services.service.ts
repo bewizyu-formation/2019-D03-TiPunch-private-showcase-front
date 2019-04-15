@@ -18,11 +18,12 @@ export class ArtistServicesService {
 
   }
 
-  async getArtist(id: number): Promise<any> {
+  async getArtist(id: string): Promise<any> {
 
     let resp;
-    //await this.ApiService.getOneArtist(id).toPromise().then(p => resp = p);
-    //return resp;
+   resp =  await this.ApiService.getOneArtist(id).then(p => resp = p, p => resp = p);
+    console.log('getArtist: ',resp);
+    return resp;
   }
 
   async updateArtist(data: any): Promise<boolean> {

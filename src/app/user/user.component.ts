@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {UserService} from '../user-service/user.service';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private userService: UserService) { }
 
-  ngOnInit() {
+
+  NavigateToArtist() {
+    this.router.navigate(['artist/5']);
+  }
+
+  async ngOnInit() {
+    console.log('getUser', this.userService.getUser());
   }
 
 }
