@@ -34,6 +34,7 @@ import {
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DialogArtistComponent } from './dialog-artist/dialog-artist.component';
 import { LocationChipsComponent } from './location-chips/location-chips.component';
+import { SafeHtmlPipe } from './artist-detail/sanitize.pipe';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { LocationChipsComponent } from './location-chips/location-chips.componen
     InscriptionArtistComponent,
     DialogArtistComponent,
     LocationChipsComponent,
+    SafeHtmlPipe,
 
   ],
   imports: [
@@ -78,6 +80,7 @@ import { LocationChipsComponent } from './location-chips/location-chips.componen
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true},
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
+    SafeHtmlPipe,
 
   ],
   bootstrap: [AppComponent],

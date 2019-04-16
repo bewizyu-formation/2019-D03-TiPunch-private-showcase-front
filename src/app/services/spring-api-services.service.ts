@@ -46,8 +46,12 @@ export class SpringApiServicesService {
     return this.http.get(`${API_BASE_URL}${'/artists/'}${id}`);
   }
 
-  addArtist(data: any) {
+  getOneArtistImg(id: string) {
 
+    return this.http.get(`${API_BASE_URL}${'/images/'}${id}`, {responseType: 'blob'});
+  }
+
+  addArtist(data: any) {
     console.log('addArtist');
     return this.http.put(`${API_BASE_URL}${API_USER}${API_ARTIST}`, data);
   }
@@ -92,11 +96,12 @@ export class SpringApiServicesService {
   uploadFile(file: File,id:any) {
 
     const fd: FormData = new FormData();
-    fd.append('name', file.name);
+    fd.append('pictureName', file.name);
     fd.append('file', file);
-
+    console.log( `${API_BASE_URL}${'/artists/'}${id}${API_IMAGE}`)
+    console.log( `${file.name}`)
     return this.http.post(
-      `${API_BASE_URL}${API_ARTIST}${id}${API_IMAGE}`,
+      `${API_BASE_URL}${'/artists/'}${id}${API_IMAGE}`,
       fd,
       {
         reportProgress: true,

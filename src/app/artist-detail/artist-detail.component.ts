@@ -7,8 +7,9 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {UserService} from '../user-service/user.service';
 import {PATH_USER} from '../app.routes.constantes';
 import {Artist} from '../model/Artist';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import { SpringApiServicesService } from '../services/spring-api-services.service';
+import { UserServicesService } from '../services/user-services.service';
+import { SafeHtmlPipe } from './sanitize.pipe';
 
 @Component({
   selector: 'app-artist-detail',
@@ -40,7 +41,7 @@ export class ArtistDetailComponent implements OnInit {
     urlSiteArtist: '',
     departements: ['rhone', 'hautes-alpes', 'alsace']
   };*/
-
+   
   artist: Artist = {
     contactMail: '',
     contactPhone: '',
@@ -64,8 +65,13 @@ export class ArtistDetailComponent implements OnInit {
   phoneCtrl: FormControl;
   websiteCtrl: FormControl;
   artistForm: FormGroup;
+  
+  // Pour l'upload d'image
+  selecetdFile: File;
+  imagePreview: ArrayBuffer|string;
 
-  constructor(private api:SpringApiServicesService,private router: Router,private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService, private route: ActivatedRoute) {
+  constructor(private api:SpringApiServicesService,private router: Router,private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService, private route: ActivatedRoute,private userService:UserService, private sanitize : SafeHtmlPipe) {
+    
 
 
     this.emailCtrl = fb.control(this.artist.contactMail ? this.artist.contactMail : '', [Validators.email]);
@@ -195,36 +201,7 @@ export class ArtistDetailComponent implements OnInit {
     console.log('formulaire final :', data);
   }
 
-  async ngOnInit() {
-    let id: any;
-     this.route.paramMap.subscribe((params: ParamMap) => {
-      id = params.get('id');
-    });
 
-    this.allowedToModify = this.userService.matchUserArtist(id);
-
-
-    let resp = await this.artistService.getArtist(id).then(p => resp = p, p => resp = p);
-
-    if(resp.status === 404){
-      this.router.navigate([PATH_USER]);
-    }
-    console.log('artistGet', resp);
-
-    let departementsArray:any[] = [];
-
-    for(let dept of resp.departments){
-      departementsArray.push( dept.nomDepartements);
-    }
-
-
-   this.artist = await resp;
-
-
-    this.artist.departements = departementsArray;
-  }
-  selecetdFile: File;
-  imagePreview: ArrayBuffer|String;
   onFileUpload(event) {
 
     this.selecetdFile = event.target.files[0];
@@ -240,7 +217,46 @@ export class ArtistDetailComponent implements OnInit {
     };
     reader.readAsDataURL(this.selecetdFile);
   }
-  NavigateToUser() {
+  navigateToUser() {
     this.router.navigate([PATH_USER]);
+  }
+
+  async ngOnInit() {
+    let id: any;
+     this.route.paramMap.subscribe((params: ParamMap) => {
+      id = params.get('id');
+    });
+
+    this.allowedToModify = this.userService.matchUserArtist(id);
+
+    let resp = await this.artistService.getArtist(id).then(p => resp = p, p => resp = p);
+
+    if(resp.status === 404){
+      this.router.navigate([PATH_USER]);
+    }
+    console.log('artistGet', resp);
+
+    let departementsArray:any[] = [];
+
+    for(let dept of resp.departments){
+      departementsArray.push( dept.nomDepartements);
+    }
+
+  this.artist.departements = departementsArray;
+   this.artist = await resp;
+
+   try {
+    let blob = await this.artistService.getArtistImg(id);
+    var reader = new FileReader();
+    reader.onloadend = () => {
+      console.log('LOADED', reader)
+       this.imagePreview =reader.result;                
+    }
+    reader.readAsDataURL(blob);
+   } catch (e) {
+    console.log('ERROR IMAGE' , e);
+   }
+
+
   }
 }

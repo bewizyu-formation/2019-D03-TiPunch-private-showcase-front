@@ -33,4 +33,9 @@ export class ArtistServicesService {
     this.ApiService.updateArtist(data).toPromise().then(p => resp = p);
     return resp;
   }
+
+  getArtistImg(id: string): Promise<any>{
+    return this.ApiService.getOneArtistImg(id).toPromise();
+
+  }
 }
