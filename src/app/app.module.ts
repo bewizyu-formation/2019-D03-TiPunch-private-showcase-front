@@ -29,7 +29,7 @@ import {
   MatButtonModule,
   MatCheckboxModule, MatChipsModule,
   MatDialogModule, MatIconModule,
-  MatInputModule, ShowOnDirtyErrorStateMatcher
+  MatInputModule, ShowOnDirtyErrorStateMatcher, MatMenuModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DialogArtistComponent } from './dialog-artist/dialog-artist.component';
@@ -70,7 +70,8 @@ import { LocationChipsComponent } from './location-chips/location-chips.componen
     MatDialogModule,
     MatIconModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatMenuModule
   ],
   providers: [
     {provide: APP_CONFIG, useValue: environment},

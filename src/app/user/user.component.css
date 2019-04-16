@@ -1,0 +1,164 @@
+.container{
+    width: 100%;
+    height: 100%;
+    background-color: #9b9b9b;
+    display: flex;
+    flex-direction:column;
+    align-content: center;
+  }
+  .app-bar-bg {
+    width: 100%;
+    height: 64px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.24), 0 0 4px 0 rgba(0, 0, 0, 0.12);
+    background-color: #4a4a4a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+    font-family: Roboto;
+  }
+  .Artistes-dans-votre {
+    width: 516px;
+    height: 32px;
+    font-family: Roboto;
+    font-size: 36px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 0.89;
+    letter-spacing: normal;
+    color: #ffffff;
+  }
+  .menu {
+    margin-left: 18px;
+    width: 24px;
+    height: 24px;
+    cursor:  pointer;
+  }
+  .Shape{
+    width: 12px;
+    height: 24px;
+    object-fit: contain;
+    margin-right: 18px;
+    cursor:  pointer;
+  }
+  .Subtitle-here {
+    margin-left:18px;
+    width: 107px;
+    height: 20px;
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.54;
+    letter-spacing: normal;
+    color: #ffffff;
+  }
+  .Title-goes-here {
+    margin-left:18px;
+    width: auto;
+    height: 32px;
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #d8d8d8;
+  }
+  .image-placeholder {
+    margin-top: 20px;
+    width: 25%;
+    height: auto;
+    display:flex;
+    flex-direction :column;
+    justify-content:flex-end;
+  }
+  .scrim {
+    position: absolute;
+    width: inherit;
+    height: 150px;
+    background-color: rgba(66, 66, 66, 0.9);
+  }
+  .img{
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .bottom{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  .material-icons-white{
+    color: #ffffff;
+  }
+  .material-icons-yellow{
+    width: 17.1px;
+    height: 16.3px;
+    color: #f5a623;
+  }
+  label {
+    margin-left:2px;
+    width: auto;
+    height: 16px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #ffffff;
+    cursor:  pointer;
+
+  }
+  .dessous{
+    display:flex;
+    justify-content: space-around;
+  }
+  .button-bg {
+    width: auto;
+    height: 24px;
+    border-radius: 2px;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    cursor:  pointer;
+  }
+  .stars{
+    margin-left: 18px;
+    margin-right: 18px;
+    display:flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+  }
+  .Nb-votes {
+    width: auto;
+    height: 14px;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: #f5a623;
+  }
+  .texte-menus{
+    margin-left: 30px;
+    color:black;
+  }
+  .options-menu{
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }

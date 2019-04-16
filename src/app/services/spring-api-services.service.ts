@@ -1,12 +1,14 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {User} from '../model/User';
-import {Artist} from '../model/Artist';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../model/User';
+import { Artist } from '../model/Artist';
 
 const API_BASE_URL = 'http://localhost:8080';
 const API_USER = '/users/';
 const API_ARTIST = 'artist/';
 const API_COUNTIES = '/departements/';
+const API_CITIES = '/communes/';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,9 @@ export class SpringApiServicesService {
   // Appels api User
 
 
+
   addUser(user: User) {
+
 
     return this.http.put(`${API_BASE_URL}${API_USER}`, user);
   }
@@ -36,9 +40,7 @@ export class SpringApiServicesService {
   // Appels Api Artists
 
   getListArtists() {
-
-    console.log('getListArtist');
-    // return this.http.get(`${API_BASE_URL}${API_ARTIST}`);
+     return this.http.get(`${API_BASE_URL}${API_USER}${API_ARTIST}list`);
   }
 
   getOneArtist(id: string) {
@@ -48,13 +50,13 @@ export class SpringApiServicesService {
 
   addArtist(data: any) {
 
-    console.log('addArtist');
+
     return this.http.put(`${API_BASE_URL}${API_USER}${API_ARTIST}`, data);
   }
 
   updateArtist(artist: Artist) {
 
-    console.log('updateArtist');
+
     return this.http.put(`${API_BASE_URL}${'/artists/'}${artist.id}`, artist);
   }
 
@@ -72,6 +74,7 @@ export class SpringApiServicesService {
 
       const verificationBase: any = await this.http.get(`${API_BASE_URL}${typeOfLogin}${login}`).toPromise();
 
+
       if (verificationBase === false) {
 
         result = null;
@@ -86,7 +89,11 @@ export class SpringApiServicesService {
       result = {invalidLogin: true};
     }
     return result;
+  }
 
+  getCities(name: string) {
+
+    return this.http.get(`${API_BASE_URL}${API_CITIES}${'?nom='}${name}`).toPromise();
 
   }
 

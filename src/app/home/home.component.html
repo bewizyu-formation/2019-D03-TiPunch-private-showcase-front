@@ -4,12 +4,32 @@
     <div class="vide">
     </div>
     <h1 class="Private-ShowCase">Private showcase</h1>
-    <div class="button-bg">
+    <div class="button-bg" *ngIf="this.userService.token==undefined">
       <a class="label" (click)="NavigateToLogin()">Se&nbsp;connecter</a>
       <a class="label">|</a>
       <a class="label" (click)="NavigateToInscription()">S'inscrire</a>
     </div>
+    <div class="button-bg" *ngIf="this.userService.token!==undefined">
+        <div class="Shape" [matMenuTriggerFor]="userOption">
+            <i class="material-icons">more_vert</i>
+            <mat-menu #userOption="matMenu" xPosition="before">
+              <button mat-menu-item class="options-menu" (click)="NavigateToUser()">
+                <i class="material-icons">queue_music</i>
+                <label>Liste&nbsp;des&nbsp;artistes</label>
+              </button>
+              <button mat-menu-item class="options-menu" (click)="navigateToProfile()">
+                <i class="material-icons">settings</i>
+                <label>Profil</label>
+              </button>
+              <button mat-menu-item class="options-menu" (click)="logout()">
+                <i class="material-icons">exit_to_app</i>
+                <label>Déconnexion</label>
+              </button>
+            </mat-menu>
+          </div>
+    </div>
   </div>
+  
   <img src="../../assets/banni-re.png" 
    class="Bannire">
   <div class="presentation">

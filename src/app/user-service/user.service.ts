@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {UserRepository} from './user.repository';
-import {HttpResponse} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { UserRepository } from './user.repository';
+import { HttpResponse } from '@angular/common/http';
 
 import {SpringApiServicesService} from '../services/spring-api-services.service';
 import {reject} from 'q';
@@ -20,7 +20,8 @@ export class UserService {
   constructor(private userRepository: UserRepository, private springApi: SpringApiServicesService) {
   }
 
-  /**
+  /**      const verificationBase: any = await this.http.get(`${API_BASE_URL}${typeOfLogin}${login}`).toPromise();
+
    * Login the user
    * @param username User login name
    * @param password User Password
@@ -32,6 +33,7 @@ export class UserService {
         .toPromise()
         .then((response: HttpResponse<any>) => {
           this.token = response.headers.get('Authorization');
+          localStorage.setItem('token', this.token);
           resolve(response.status);
         })
 
