@@ -10,8 +10,14 @@ export class GeoServicesService {
   }
 
 
-  async getCounties(county: string){
+  async getCounties(county: string) {
 
     return await this.ApiService.getCounties(county);
+  }
+  async getCities(city: string) {
+
+    return await this.ApiService.getCities(city);
+
+
   }
 }

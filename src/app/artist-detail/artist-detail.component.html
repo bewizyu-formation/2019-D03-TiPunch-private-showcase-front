@@ -15,16 +15,16 @@
 
       <h2 class="Informations-gnrales">Presentation</h2>
       <div class="Rectangle">
-          <div class="image-placeholder" (click)="selectFile.click()">
-              <input *ngIf="allowedToModify" style="display:none" type="file" (change)="onFileUpload($event)" #selectFile accept="image/*">
-              <img *ngIf="imagePreview" src={{imagePreview}} alt="" class="dimentionnement">
-          </div>
+        <div class="image-placeholder" (click)="selectFile.click()">
+          <input *ngIf="allowedToModify" style="display:none" type="file" (change)="onFileUpload($event)" #selectFile accept="image/*">
+          <img *ngIf="imagePreview" src={{imagePreview}} alt="" class="dimentionnement">
+        </div>
         <div class="text">
-          <h3 class="Nom-de-lartiste">{{artist?.nameArtist!=='' ? artist?.nameArtist : "Veuillez remplir un nom d'artiste" }} <img *ngIf="allowedToModify" class="pencil"
-              src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('nameArtist')">
+          <h3 class="Nom-de-lartiste">{{artist?.nameArtist!=='' ? artist?.nameArtist : "Veuillez remplir un nom d'artiste"t}} <!--<img *ngIf="allowedToModify" class="pencil"
+              src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('nameArtist')">-->
           </h3>
-          <div class="Description-courte">{{artist?.abstract!==''? artist?.abstract : "Veuillez remplir une description courte" }} <img *ngIf="allowedToModify" class="pencil"
-              src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('abstract')">
+          <div class="Description-courte">{{artist?.shortDescriptionArtist !== '' ? artist?.shortDescriptionArtist : "Veuillez remplir une description courte"}} <img *ngIf="allowedToModify" class="pencil"
+              src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('shortDescriptionArtist')">
           </div>
           <div class="description-longue">
             <span class="description-longue-texte">{{artist?.descriptionArtist!==''? artist?.descriptionArtist : "Veuillez remplir une description longue"}}</span>
@@ -99,8 +99,9 @@
         </ng-template>
         <div class="baisser-le-bouton">
           <div class="location">
-            <h5 class="Slctionnez-les-d">Séléctionnez le(s) département(s) pour vos concerts :</h5>
-            <app-location-chips [departements]="artist.departements"></app-location-chips>
+            <h5 class="Slctionnez-les-d">Sélectionnez le(s) département(s) pour vos concerts :</h5>
+            <app-location-chips [departements]="artist.departements"
+                                [allowedToModify]="allowedToModify"></app-location-chips>
           </div>
           <div *ngIf="allowedToModify">
             <button mat-button class="button-bg-vert" mat-button (click)="handleSubmit()">Sauvegarder</button>

@@ -31,17 +31,13 @@ export class DialogArtistComponent implements OnInit {
 
       case 'nameArtist':
         this.contentCtrl = fb.control(data.content,
-          [Validators.pattern('^[a-zA-Z0-9-\\_\\ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.!:;,\\(\\)\\\']{3,}$')],
           [this.uniqueLogin.artistNameExists]);
-        console.log(this.fieldName);
         this.artistName = true;
         break;
 
       case 'shortDescriptionArtist':
       case 'descriptionArtist':
-        this.contentCtrl = fb.control(data.content,
-          [Validators.pattern('^[a-zA-Z0-9-\\_\\ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.!:;,\\(\\)\\\']{3,}$')]);
-        console.log(this.fieldName);
+        this.contentCtrl = fb.control(data.content);
         this.artistName = false;
         break;
     }
@@ -59,7 +55,6 @@ export class DialogArtistComponent implements OnInit {
   }
 
   save() {
-    console.log(this.form.value);
     this.dialogRef.close(this.form.value);
   }
 

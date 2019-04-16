@@ -1,4 +1,133 @@
-<p>
-  user works!
-</p>
-<a (click)="NavigateToArtist()">artist :</a>
+<div class="container">
+  <div class="app-bar-bg">
+    <div class="menu" [matMenuTriggerFor]="homeSideMenu">
+      <i class="material-icons">menu</i>
+      <mat-menu #homeSideMenu="matMenu" xPosition="after">
+        <button mat-menu-item class="options-menu" (click)="navigateToHome()">
+          <i class="material-icons">move_to_inbox</i>
+          <label class="texte-menus">Accueil</label>
+        </button>
+      </mat-menu>
+    </div>
+    <h1 class="Artistes-dans-votre">Artistes&nbsp;dans&nbsp;votre&nbsp;departement</h1>
+    <div class="Shape" [matMenuTriggerFor]="userOption">
+      <i class="material-icons">more_vert</i>
+      <mat-menu #userOption="matMenu" xPosition="before">
+        <button mat-menu-item class="options-menu">
+          <i class="material-icons">audiotrack</i>
+          <label class="texte-menus">Artiste</label>
+        </button>
+        <button mat-menu-item class="options-menu" (click)="navigateToProfile()">
+          <i class="material-icons">settings</i>
+          <label class="texte-menus">Profil</label>
+        </button>
+        <button mat-menu-item class="options-menu" (click)="logout()">
+          <i class="material-icons">exit_to_app</i>
+          <label class="texte-menus">Déconnexion</label>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="image-placeholder" *ngFor="let artiste of this.artistes">
+      <img src={{image}} class="img">
+      <div class="scrim">
+        <h5 class="Title-goes-here">{{artiste?.nameArtist}}</h5>
+        <p class="Subtitle-here">{{artiste?.descriptionArtist}}</p>
+        <div class="dessous">
+          <span class="stars" [ngSwitch]="artiste.noteArtist">
+            <span class="mark" *ngSwitchCase="0">
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+            </span>
+            <span class="mark" *ngSwitchCase="1">
+              <i class="material-icons material-icons-yellow">star_half</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+            </span>
+            <span class="mark" *ngSwitchCase="2">
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+            </span>
+            <span class="mark" *ngSwitchCase="3">
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star_half</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+            </span>
+            <span class="mark" *ngSwitchCase="4">
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+            </span>
+            <span class="mark" *ngSwitchCase="5">
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star_half</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+            </span>
+            <span class="mark" *ngSwitchCase="6">
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+            </span>
+            <span class="mark" *ngSwitchCase="7">
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star_half</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+            </span>
+            <span class="mark" *ngSwitchCase="8">
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star_border</i>
+            </span>
+            <span class="mark" *ngSwitchCase="9">
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star_half</i>
+            </span>
+            <span class="mark" *ngSwitchCase="10">
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+              <i class="material-icons material-icons-yellow">star</i>
+            </span>
+            <div class="Nb-votes">
+              ({{artiste?.nbVote}}&nbsp;votes)
+            </div>
+          </span>
+          <span class="button-bg" (click)="navigateToArtist(artiste.id)">
+            <i class="material-icons material-icons-white">visibility</i>
+            <label>Voir</label>
+          </span>
+          <span class="button-bg">
+            <i class="material-icons material-icons-white">today</i>
+            <label>Booker</label>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

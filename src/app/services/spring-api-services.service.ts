@@ -7,7 +7,10 @@ const API_BASE_URL = 'http://localhost:8080';
 const API_USER = '/users/';
 const API_ARTIST = 'artist/';
 const API_COUNTIES = '/departements/';
+const API_CITIES = '/communes/';
 const API_IMAGE = '/upload';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +20,6 @@ export class SpringApiServicesService {
   }
 
   // Appels api User
-
 
   addUser(user: User) {
 
@@ -36,9 +38,7 @@ export class SpringApiServicesService {
   // Appels Api Artists
 
   getListArtists() {
-
-    console.log('getListArtist');
-    // return this.http.get(`${API_BASE_URL}${API_ARTIST}`);
+    return this.http.get(`${API_BASE_URL}${API_USER}${API_ARTIST}list`);
   }
 
   getOneArtist(id: string) {
@@ -52,13 +52,12 @@ export class SpringApiServicesService {
   }
 
   addArtist(data: any) {
-    console.log('addArtist');
+
     return this.http.put(`${API_BASE_URL}${API_USER}${API_ARTIST}`, data);
   }
 
   updateArtist(artist: Artist) {
 
-    console.log('updateArtist');
     return this.http.put(`${API_BASE_URL}${'/artists/'}${artist.id}`, artist);
   }
 
@@ -76,6 +75,7 @@ export class SpringApiServicesService {
 
       const verificationBase: any = await this.http.get(`${API_BASE_URL}${typeOfLogin}${login}`).toPromise();
 
+
       if (verificationBase === false) {
 
         result = null;
@@ -90,16 +90,26 @@ export class SpringApiServicesService {
       result = {invalidLogin: true};
     }
     return result;
+  }
 
+  getCities(name: string) {
+
+    return this.http.get(`${API_BASE_URL}${API_CITIES}${'?nom='}${name}`).toPromise();
 
   }
-  uploadFile(file: File,id:any) {
+
+  getCounties(county: string) {
+    return this.http.get(`${API_BASE_URL}${API_COUNTIES}${'?nom='}${county}`).toPromise();
+  }
+
+
+  uploadFile(file: File, id: any) {
 
     const fd: FormData = new FormData();
     fd.append('pictureName', file.name);
     fd.append('file', file);
-    console.log( `${API_BASE_URL}${'/artists/'}${id}${API_IMAGE}`)
-    console.log( `${file.name}`)
+    console.log(`${API_BASE_URL}${'/artists/'}${id}${API_IMAGE}`);
+    console.log(`${file.name}`);
     return this.http.post(
       `${API_BASE_URL}${'/artists/'}${id}${API_IMAGE}`,
       fd,
@@ -108,8 +118,5 @@ export class SpringApiServicesService {
         responseType: 'text'
       }
     );
-  }
-  getCounties(county: string){
-    return this.http.get(`${API_BASE_URL}${API_COUNTIES}${'?nom='}${county}`).toPromise();
   }
 }

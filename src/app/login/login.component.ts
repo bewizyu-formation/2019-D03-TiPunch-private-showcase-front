@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   handleSubmit() {
     this.userService.login(this.usernameCtrl.value, this.passwordCtrl.value).then(status => {
       if (status === 200) {
+        this.userService.getUser();
         this.router.navigate([PATH_USER]);
       } else {
         this.error = true;

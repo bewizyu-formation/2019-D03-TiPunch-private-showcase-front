@@ -32,7 +32,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  flex-direction:space-between;
   cursor:  pointer;
 }
 .return{
@@ -135,14 +134,14 @@
   justify-content: flex-end;
   flex-wrap: wrap-reverse;
   margin-bottom: 18px;
-
 }
 .bounds {
   width: 60%;
 }
-/*::ng-deep .mat-checkbox .mat-checkbox-frame {
-  border-color: #17998c;
-}*/
+.city{
+ width:100%;
+}
+
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
   border-color: #17998c;
   width: 18px;
