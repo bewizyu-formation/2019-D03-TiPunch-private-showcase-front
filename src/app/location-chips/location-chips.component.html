@@ -7,7 +7,7 @@
       {{county}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
-    <input matInput type="text" aria-label="counties" placeholder="Département possible" #countyInput
+    <input *ngIf="allowedToModify" matInput type="text" aria-label="counties" placeholder="Département possible" #countyInput
            [matAutocomplete]="auto"
            [matChipInputFor]="chipList"
            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -15,7 +15,7 @@
            (matChipInputTokenEnd)="add($event)"
             [formControl]="newCountyCtrl">
   </mat-chip-list>
-  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+  <mat-autocomplete  #auto="matAutocomplete" (optionSelected)="selected($event)">
     <mat-option *ngFor="let item of countiesList" [value]="item.nom">
       {{item.nom}}
     </mat-option>

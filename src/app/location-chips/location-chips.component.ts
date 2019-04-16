@@ -9,10 +9,13 @@ import {GeoServicesService} from '../services/geo-services.service';
   templateUrl: './location-chips.component.html',
   styleUrls: ['./location-chips.component.css']
 })
-export class LocationChipsComponent implements OnInit, OnChanges {
+export class LocationChipsComponent implements OnInit {
 
   @Input()
   departements: any;
+
+  @Input()
+  allowedToModify: any;
 
   newCountyCtrl: FormControl;
   countiesList: any[] = [];
@@ -20,7 +23,7 @@ export class LocationChipsComponent implements OnInit, OnChanges {
   @ViewChild('countyInput') countyInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor(fb: FormBuilder, private geoService: GeoServicesService){
+  constructor(fb: FormBuilder, private geoService: GeoServicesService) {
 
     this.newCountyCtrl = fb.control('');
   }
@@ -32,43 +35,50 @@ export class LocationChipsComponent implements OnInit, OnChanges {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
 
-
   add(event: MatChipInputEvent): void {
-    console.log(event);
-    if (!this.matAutocomplete.isOpen) {
-      const input = event.input;
-      const value = event.value;
+    if (this.allowedToModify) {
 
-      // Add our fruit
-      if ((value || '').trim()) {
-        this.departements.push(value.trim());
+      if (!this.matAutocomplete.isOpen) {
+        const input = event.input;
+        const value = event.value;
+
+        // Add our fruit
+        if ((value || '').trim()) {
+          this.departements.push(value.trim());
+        }
+
+        // Reset the input value
+        if (input) {
+          input.value = '';
+        }
+
+        this.newCountyCtrl.setValue(null);
       }
-
-      // Reset the input value
-      if (input) {
-        input.value = '';
-      }
-
-      this.newCountyCtrl.setValue(null);
     }
   }
-  remove(county: any): void {
-    const index = this.departements.indexOf(county);
 
-    if (index >= 0) {
-      this.departements.splice(index, 1);
+  remove(county: any): void {
+    if (this.allowedToModify) {
+
+      const index = this.departements.indexOf(county);
+
+      if (index >= 0) {
+        this.departements.splice(index, 1);
+      }
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.departements.push(event.option.viewValue);
-    this.countyInput.nativeElement.value = '';
-    this.newCountyCtrl.setValue(null);
+    if (this.allowedToModify) {
+
+      this.departements.push(event.option.viewValue);
+      this.countyInput.nativeElement.value = '';
+      this.newCountyCtrl.setValue(null);
+    }
   }
 
 
   ngOnInit() {
-    console.log('dept',this.departements);
     this.newCountyCtrl.valueChanges.subscribe(value => {
       this.geoService.getCounties(value).then((data: any[]) => this.countiesList = data);
 
@@ -76,9 +86,7 @@ export class LocationChipsComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('CHANGES', changes);
-  }
+
 }
 
 

@@ -18,12 +18,12 @@
         <img class="image-placeholder" src="{{artist?.urlImage}}" alt="">
 
         <div class="text">
-          <h3 class="Nom-de-lartiste">{{artist?.nameArtist}} <img *ngIf="allowedToModify" class="pencil"
-              src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('nameArtist')">
+          <h3 class="Nom-de-lartiste">{{artist?.nameArtist}} <!--<img *ngIf="allowedToModify" class="pencil"
+              src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('nameArtist')">-->
           </h3>
 
           <div class="Description-courte">{{artist?.shortDescriptionArtist}} <img *ngIf="allowedToModify" class="pencil"
-              src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('abstract')">
+              src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('shortDescriptionArtist')">
           </div>
           <div class="description-longue">
             <span class="description-longue-texte">{{artist?.descriptionArtist}}</span>
@@ -99,7 +99,8 @@
         <div class="baisser-le-bouton">
           <div class="location">
             <h5 class="Slctionnez-les-d">Séléctionnez le(s) département(s) pour vos concerts :</h5>
-            <app-location-chips [departements]="artist.departements"></app-location-chips>
+            <app-location-chips [departements]="artist.departements"
+                                [allowedToModify]="allowedToModify"></app-location-chips>
           </div>
           <div *ngIf="allowedToModify">
             <button mat-button class="button-bg-vert" mat-button (click)="handleSubmit()">Sauvegarder</button>

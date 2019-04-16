@@ -14,30 +14,7 @@ import {Artist} from '../model/Artist';
   styleUrls: ['./artist-detail.component.css']
 })
 export class ArtistDetailComponent implements OnInit {
-/*
-  artist = {
-    id: 5,
-    nameArtist: 'Trop FUn',
-    contactMail: 'test@test.fr',
-    cityArtist: 'Lyon',
-    shortDescriptionArtist: 'trjlkqfjlfjkldfjkncksjs<jkfljK ',
-    descriptionArtist: 'Curabitur lobortis id lorem id bibendum. Ut id consectetur magna. Quisque volutpat augue enim,' +
-      ' pulvinar lobortis nibh lacinia at. Vestibulum nec erat ut mi sollicitudin porttitor id sit amet ' +
-      'risus. Nam tempus vel odio vitae aliquam. ' +
-      'In imperdiet eros id lacus vestibulum vestibulum. Suspendisse fer' +
-      'mentum sem sagittis ante venenatis egestas quis vel justo. Maecenas semper suscipit nunc, sed aliquam sapien convalli' +
-      's eu. Nulla ut turpis in' +
-      ' diam dapibus consequat. Curabitur lobortis id lorem id bibendum. Ut id consectetur magna. Quisque volutpat augue enim, pulvinar lobortis nibh ' +
-      'lacinia at. Vestibulum nec erat ut mi sollicitudin porttitor id sit amet risus. Nam tempus vel odio vitae aliquam. In' +
-      ' imperdiet eros id lacus vestibulum vestibulum. Suspendisse fermentum sem sagittis ante ve' +
-      'nenatis egestas quis vel justo. Maecenas semper suscipit nunc, sed aliquam sapien convallis eu. Nulla ut turpis in diam dapibus consequat.',
-    noteArtist: 1,
-    nbVotes: 12,
-    urlImage: '../../src/assets/plaholderJaquette.jpg',
-    contactPhone: '',
-    urlSiteArtist: '',
-    departements: ['rhone', 'hautes-alpes', 'alsace']
-  };*/
+
 
   artist: Artist = {
     contactMail: '',
@@ -63,11 +40,13 @@ export class ArtistDetailComponent implements OnInit {
   websiteCtrl: FormControl;
   artistForm: FormGroup;
 
-  constructor(private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService, private route: ActivatedRoute, private userService: UserService, private router: Router) {
+  constructor(private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService,
+              private route: ActivatedRoute, private userService: UserService, private router: Router) {
 
 
     this.emailCtrl = fb.control(this.artist.contactMail ? this.artist.contactMail : '', [Validators.email]);
-    this.phoneCtrl = fb.control(this.artist.contactPhone ? this.artist.contactPhone : '', [Validators.pattern('^([0-9]{2}( |-|)){4}[0-9]{2}$')]);
+    this.phoneCtrl = fb.control(this.artist.contactPhone ? this.artist.contactPhone : '',
+      [Validators.pattern('^([0-9]{2}( |-|)){4}[0-9]{2}$')]);
     this.websiteCtrl = fb.control(this.artist.urlSiteArtist ? this.artist.urlSiteArtist : '', [Validators.pattern(
       '^(http(s)?:\\/\\/.)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$')]);
 
@@ -144,32 +123,35 @@ export class ArtistDetailComponent implements OnInit {
   // selectionne dans quels champs updater les nouvelles données de la boite de dialogue
   handleClosingDial(data) {
 
-    switch (data.fieldName) {
-      case 'nameArtist':
+    if (data) {
 
-        this.artist.nameArtist = data.content;
-        break;
+      switch (data.fieldName) {
+        case 'nameArtist':
 
-      case 'shortDescriptionArtist':
+          this.artist.nameArtist = data.content;
+          break;
 
-        this.artist.shortDescriptionArtist = data.content;
-        break;
+        case 'shortDescriptionArtist':
 
-      case 'descriptionArtist':
+          this.artist.shortDescriptionArtist = data.content;
+          break;
 
-        this.artist.descriptionArtist = data.content;
-        break;
+        case 'descriptionArtist':
+
+          this.artist.descriptionArtist = data.content;
+          break;
+      }
+
     }
   }
 
   handleSubmit() {
 
-    let departementsArray1:any[] = [];
+    let departementsArray1: any[] = [];
 
-    for(let dept of this.artist.departements){
-      departementsArray1.push( {nomDepartements : dept});
+    for (let dept of this.artist.departements) {
+      departementsArray1.push({nomDepartements: dept});
     }
-
 
 
     // creation de l'objet qui sera envoyer au serveur
@@ -187,15 +169,14 @@ export class ArtistDetailComponent implements OnInit {
 
     };
 
+    this.artistService.updateArtist(data);
 
-   // this.artistService.updateArtist(data);
 
-    console.log('formulaire final :', data);
   }
 
   async ngOnInit() {
     let id: any;
-     this.route.paramMap.subscribe((params: ParamMap) => {
+    this.route.paramMap.subscribe((params: ParamMap) => {
       id = params.get('id');
     });
 
@@ -204,21 +185,20 @@ export class ArtistDetailComponent implements OnInit {
 
     let resp = await this.artistService.getArtist(id).then(p => resp = p, p => resp = p);
 
-    if(resp.status === 404){
+    if (resp.status === 404) {
       this.router.navigate([PATH_USER]);
     }
-    console.log('artistGet', resp);
 
-    let departementsArray:any[] = [];
+    // charge les departements dans les departements d'artiste en les transformant en tableau d'objet pour les chips
 
-    for(let dept of resp.departments){
-      departementsArray.push( dept.nomDepartements);
+    let departementsArray: any[] = [];
+
+    for (let dept of resp.departments) {
+      departementsArray.push(dept.nomDepartements);
     }
 
 
-   this.artist = await resp;
-
-
+    this.artist = await resp;
     this.artist.departements = departementsArray;
   }
 
