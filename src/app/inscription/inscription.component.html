@@ -46,10 +46,10 @@
               [formControl]="password2Ctrl">
             <mat-error *ngIf="password2Ctrl.dirty && password2Ctrl.hasError('required')">Le champ mot de passe est obligatoire
             </mat-error>
-            <mat-error *ngIf="passwordsGroup.dirty && passwordsGroup.hasError('passwordValid')">Les champs mot de passe doivent être identiques
-
-            </mat-error>
           </mat-form-field>
+          <mat-error *ngIf="passwordsGroup.dirty && passwordsGroup.hasError('passwordValid')">Les champs mot de passe doivent être identiques
+          </mat-error>
+
 
         </div>
 

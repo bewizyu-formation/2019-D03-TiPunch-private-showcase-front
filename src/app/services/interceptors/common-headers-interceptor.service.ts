@@ -9,6 +9,8 @@ export class CommonHeadersInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+
     const clone = req.clone({
       setHeaders: {
         'Content-Type': 'application/json'
