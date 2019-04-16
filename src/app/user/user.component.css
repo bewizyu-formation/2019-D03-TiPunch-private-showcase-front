@@ -71,6 +71,7 @@
   .image-placeholder {
     margin: 20px 20px 20px 20px;
     width: 25%;
+    min-width: 300px;
     height: auto;
     display:flex;
     flex-direction :column;
@@ -79,6 +80,7 @@
   .scrim {
     position: absolute;
     width: inherit;
+    min-width: 300px;
     height: 150px;
     background-color: rgba(66, 66, 66, 0.9);
   }
@@ -120,6 +122,7 @@
   .dessous{
     display:flex;
     justify-content: space-around;
+    min-width: 300px;
   }
   .button-bg {
     width: auto;
