@@ -7,7 +7,7 @@ const API_BASE_URL = 'http://localhost:8080';
 const API_USER = '/users/';
 const API_ARTIST = 'artist/';
 const API_COUNTIES = '/departements/';
-
+const API_IMAGE = '/upload';
 @Injectable({
   providedIn: 'root'
 })
@@ -89,7 +89,21 @@ export class SpringApiServicesService {
 
 
   }
+  uploadFile(file: File,id:any) {
 
+    const fd: FormData = new FormData();
+    fd.append('name', file.name);
+    fd.append('file', file);
+
+    return this.http.post(
+      `${API_BASE_URL}${API_ARTIST}${id}${API_IMAGE}`,
+      fd,
+      {
+        reportProgress: true,
+        responseType: 'text'
+      }
+    );
+  }
   getCounties(county: string){
     return this.http.get(`${API_BASE_URL}${API_COUNTIES}${'?nom='}${county}`).toPromise();
   }

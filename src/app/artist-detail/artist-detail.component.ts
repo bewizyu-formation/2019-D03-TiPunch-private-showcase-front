@@ -7,6 +7,8 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {UserService} from '../user-service/user.service';
 import {PATH_USER} from '../app.routes.constantes';
 import {Artist} from '../model/Artist';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { SpringApiServicesService } from '../services/spring-api-services.service';
 
 @Component({
   selector: 'app-artist-detail',
@@ -63,7 +65,7 @@ export class ArtistDetailComponent implements OnInit {
   websiteCtrl: FormControl;
   artistForm: FormGroup;
 
-  constructor(private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService, private route: ActivatedRoute, private userService: UserService, private router: Router) {
+  constructor(private api:SpringApiServicesService,private router: Router,private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService, private route: ActivatedRoute) {
 
 
     this.emailCtrl = fb.control(this.artist.contactMail ? this.artist.contactMail : '', [Validators.email]);
@@ -221,5 +223,24 @@ export class ArtistDetailComponent implements OnInit {
 
     this.artist.departements = departementsArray;
   }
+  selecetdFile: File;
+  imagePreview: ArrayBuffer|String;
+  onFileUpload(event) {
 
+    this.selecetdFile = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      this.imagePreview = reader.result;
+      this.api.uploadFile(this.selecetdFile,this.route.snapshot.paramMap.get('id'))
+        .subscribe(
+          () => console.log('Upload success'),
+          error => console.log('Upload error', error),
+        );
+    };
+    reader.readAsDataURL(this.selecetdFile);
+  }
+  NavigateToUser() {
+    this.router.navigate([PATH_USER]);
+  }
 }

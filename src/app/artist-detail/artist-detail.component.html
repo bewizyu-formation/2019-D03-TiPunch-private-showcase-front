@@ -1,7 +1,7 @@
 <div class="container">
   <div class="app-bar-bg">
     <div class="button-bg">
-      <a class="return">&larr;</a>
+      <a class="return" (click)="NavigateToUser()">&larr;</a>
     </div>
     <h1 class="Private-ShowCase">Fiche Artiste</h1>
     <div class="vide">
@@ -15,18 +15,20 @@
 
       <h2 class="Informations-gnrales">Presentation</h2>
       <div class="Rectangle">
-        <img class="image-placeholder" src="{{artist?.urlImage}}" alt="">
-
+          <div class="image-placeholder" (click)="selectFile.click()">
+              <input style="display:none" type="file" (change)="onFileUpload($event)" #selectFile accept="image/*">
+              <img *ngIf="!imagePreview" src="{{artist?.img_url}}" alt="" class="dimentionnement">
+              <img *ngIf="imagePreview" [src]="imagePreview" alt="" class="dimentionnement">
+          </div>
         <div class="text">
-          <h3 class="Nom-de-lartiste">{{artist?.nameArtist}} <img *ngIf="allowedToModify" class="pencil"
+          <h3 class="Nom-de-lartiste">{{artist?.nameArtist!=='' ? artist?.nameArtist : "Veuillez remplir un nom d'artiste" }} <img *ngIf="allowedToModify" class="pencil"
               src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('nameArtist')">
           </h3>
-
-          <div class="Description-courte">{{artist?.shortDescriptionArtist}} <img *ngIf="allowedToModify" class="pencil"
+          <div class="Description-courte">{{artist?.abstract!==''? artist?.abstract : "Veuillez remplir une description courte" }} <img *ngIf="allowedToModify" class="pencil"
               src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('abstract')">
           </div>
           <div class="description-longue">
-            <span class="description-longue-texte">{{artist?.descriptionArtist}}</span>
+            <span class="description-longue-texte">{{artist?.descriptionArtist!==''? artist?.descriptionArtist : "Veuillez remplir une description longue"}}</span>
             <span><img *ngIf="allowedToModify" class="pencil" src="../../assets/mode-edit.svg" alt="pencil"
                 (click)="openDialog('descriptionArtist')"></span>
 
