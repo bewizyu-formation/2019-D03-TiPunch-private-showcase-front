@@ -37,7 +37,7 @@ export class DialogArtistComponent implements OnInit {
         this.artistName = true;
         break;
 
-      case 'abstract':
+      case 'shortDescriptionArtist':
       case 'descriptionArtist':
         this.contentCtrl = fb.control(data.content,
           [Validators.pattern('^[a-zA-Z0-9-\\_\\ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.!:;,\\(\\)\\\']{3,}$')]);

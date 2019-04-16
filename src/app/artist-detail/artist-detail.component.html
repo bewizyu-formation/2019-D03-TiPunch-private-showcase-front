@@ -12,20 +12,24 @@
     <form [formGroup]="artistForm" class="bottom">
       <!--(ngSubmit)="handleSubmit()" [formGroup]="artistForm"-->
 
+
       <h2 class="Informations-gnrales">Presentation</h2>
       <div class="Rectangle">
-        <img class="image-placeholder" src="{{artist?.img_url}}" alt="">
+        <img class="image-placeholder" src="{{artist?.urlImage}}" alt="">
+
         <div class="text">
           <h3 class="Nom-de-lartiste">{{artist?.nameArtist}} <img *ngIf="allowedToModify" class="pencil"
               src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('nameArtist')">
           </h3>
-          <div class="Description-courte">{{artist?.abstract}} <img *ngIf="allowedToModify" class="pencil"
+
+          <div class="Description-courte">{{artist?.shortDescriptionArtist}} <img *ngIf="allowedToModify" class="pencil"
               src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('abstract')">
           </div>
           <div class="description-longue">
             <span class="description-longue-texte">{{artist?.descriptionArtist}}</span>
             <span><img *ngIf="allowedToModify" class="pencil" src="../../assets/mode-edit.svg" alt="pencil"
                 (click)="openDialog('descriptionArtist')"></span>
+
 
           </div>
         </div>
@@ -34,13 +38,14 @@
       <h2 class="Informations-gnrales">Informations générales</h2>
       <div class="Rectangle">
         <div class="contacts" *ngIf="allowedToModify; else modificationAllowed">
+
           <div class="bounds">
             <span class="icon">
               <mat-icon matPrefix>alternate_email</mat-icon>
             </span>
             <span>
               <mat-form-field class="input">
-                <input matInput type="text" placeholder="Site Web" value="{{artist?.website}}"
+                <input matInput type="text" placeholder="Site Web" value="{{artist?.urlSiteArtist}}"
                   [formControl]="websiteCtrl">
                 <mat-error *ngIf="websiteCtrl.dirty && websiteCtrl.hasError('pattern')">L'url doit être valide
                 </mat-error>
@@ -53,7 +58,7 @@
             </span>
             <span>
               <mat-form-field class="input">
-                <input matInput type="text" placeholder="Téléphone" value="{{artist?.phoneNb}}"
+                <input matInput type="text" placeholder="Téléphone" value="{{artist?.contactPhone}}"
                   [formControl]="phoneCtrl" [disabled]="!allowedToModify">
                 <mat-error *ngIf="phoneCtrl.dirty && phoneCtrl.hasError('pattern')">Le téléphone doit être valide
                 </mat-error>
@@ -66,38 +71,40 @@
             </span>
             <span>
               <mat-form-field class="input">
-                <input matInput type="email" placeholder="Email" value="{{artist?.mailArtist}}"
+                <input matInput type="email" placeholder="Email" value="{{artist?.contactMail}}"
                   [formControl]="emailCtrl">
                 <mat-error *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">L'email doit être valide</mat-error>
               </mat-form-field>
             </span>
           </div>
 
+
         </div>
         <ng-template #modificationAllowed>
           <div class="contacts noInput">
             <div class="fields">
               <mat-icon>alternate_email</mat-icon>
-              {{artist?.website}}
+              {{artist?.urlSiteArtist}}
             </div>
             <div class="fields">
               <mat-icon>phone</mat-icon>
-              {{artist?.phoneNb}}
+              {{artist?.contactPhone}}
             </div>
             <div class="fields">
               <mat-icon>email</mat-icon>
-              {{artist?.mailArtist}}
+              {{artist?.contactMail}}
             </div>
           </div>
         </ng-template>
         <div class="baisser-le-bouton">
           <div class="location">
             <h5 class="Slctionnez-les-d">Séléctionnez le(s) département(s) pour vos concerts :</h5>
-            <app-location-chips [counties]="artist.counties"></app-location-chips>
+            <app-location-chips [departements]="artist.departements"></app-location-chips>
           </div>
           <div *ngIf="allowedToModify">
             <button mat-button class="button-bg-vert" mat-button (click)="handleSubmit()">Sauvegarder</button>
           </div>
+
         </div>
       </div>
 

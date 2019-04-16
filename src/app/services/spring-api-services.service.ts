@@ -43,12 +43,7 @@ export class SpringApiServicesService {
 
   getOneArtist(id: string) {
 
-/*    const data: any = {
-      id: id,
-
-    };*/
-
-    return this.http.get(`${API_BASE_URL}${'/artists/'}${id}`).toPromise();
+    return this.http.get(`${API_BASE_URL}${'/artists/'}${id}`);
   }
 
   addArtist(data: any) {
@@ -60,7 +55,7 @@ export class SpringApiServicesService {
   updateArtist(artist: Artist) {
 
     console.log('updateArtist');
-    return this.http.put(`${API_BASE_URL}${API_ARTIST}${artist.id}`, artist);
+    return this.http.put(`${API_BASE_URL}${'/artists/'}${artist.id}`, artist);
   }
 
 

@@ -3,7 +3,10 @@ import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogArtistComponent} from '../dialog-artist/dialog-artist.component';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ArtistServicesService} from '../services/artist-services.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {UserService} from '../user-service/user.service';
+import {PATH_USER} from '../app.routes.constantes';
+import {Artist} from '../model/Artist';
 
 @Component({
   selector: 'app-artist-detail',
@@ -11,12 +14,13 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
   styleUrls: ['./artist-detail.component.css']
 })
 export class ArtistDetailComponent implements OnInit {
-
+/*
   artist = {
+    id: 5,
     nameArtist: 'Trop FUn',
-    mailArtist: 'test@test.fr',
+    contactMail: 'test@test.fr',
     cityArtist: 'Lyon',
-    abstract: 'trjlkqfjlfjkldfjkncksjs<jkfljK ',
+    shortDescriptionArtist: 'trjlkqfjlfjkldfjkncksjs<jkfljK ',
     descriptionArtist: 'Curabitur lobortis id lorem id bibendum. Ut id consectetur magna. Quisque volutpat augue enim,' +
       ' pulvinar lobortis nibh lacinia at. Vestibulum nec erat ut mi sollicitudin porttitor id sit amet ' +
       'risus. Nam tempus vel odio vitae aliquam. ' +
@@ -29,12 +33,28 @@ export class ArtistDetailComponent implements OnInit {
       'nenatis egestas quis vel justo. Maecenas semper suscipit nunc, sed aliquam sapien convallis eu. Nulla ut turpis in diam dapibus consequat.',
     noteArtist: 1,
     nbVotes: 12,
-    img_url: '../../src/assets/plaholderJaquette.jpg',
-    phoneNb: '',
-    website: '',
-    counties: ['rhone', 'hautes-alpes', 'alsace']
+    urlImage: '../../src/assets/plaholderJaquette.jpg',
+    contactPhone: '',
+    urlSiteArtist: '',
+    departements: ['rhone', 'hautes-alpes', 'alsace']
+  };*/
+
+  artist: Artist = {
+    contactMail: '',
+    contactPhone: '',
+    urlSiteArtist: '',
+    id: 0,
+    nameArtist: '',
+    cityArtist: '',
+    descriptionArtist: '',
+    noteArtist: '',
+    nbVotes: '',
+    users: [],
+    departements: [],
+    shortDescriptionArtist: '',
+    urlImage: '',
   };
-allowedToModify =true;
+  allowedToModify = false;
 
 
   // initialisation des champs
@@ -43,20 +63,20 @@ allowedToModify =true;
   websiteCtrl: FormControl;
   artistForm: FormGroup;
 
-  constructor(private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService, private route: ActivatedRoute) {
+  constructor(private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService, private route: ActivatedRoute, private userService: UserService, private router: Router) {
 
 
-    this.emailCtrl = fb.control(this.artist.mailArtist, [Validators.email]);
-    this.phoneCtrl = fb.control(this.artist.phoneNb, [Validators.pattern('^([0-9]{2}( |-|)){4}[0-9]{2}$')]);
-    this.websiteCtrl = fb.control(this.artist.website, [Validators.pattern(
+    this.emailCtrl = fb.control(this.artist.contactMail ? this.artist.contactMail : '', [Validators.email]);
+    this.phoneCtrl = fb.control(this.artist.contactPhone ? this.artist.contactPhone : '', [Validators.pattern('^([0-9]{2}( |-|)){4}[0-9]{2}$')]);
+    this.websiteCtrl = fb.control(this.artist.urlSiteArtist ? this.artist.urlSiteArtist : '', [Validators.pattern(
       '^(http(s)?:\\/\\/.)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$')]);
 
 
     // création d'un objet formulaire
     this.artistForm = fb.group({
-      mailArtist: this.emailCtrl,
-      phoneNb: this.phoneCtrl,
-      website: this.websiteCtrl,
+      contactMail: this.emailCtrl,
+      contactPhone: this.phoneCtrl,
+      urlSiteArtist: this.websiteCtrl,
 
     });
 
@@ -84,12 +104,12 @@ allowedToModify =true;
         content = this.artist.nameArtist;
         break;
 
-      case 'abstract':
+      case 'shortDescriptionArtist':
 
 
         title = 'Description courte';
-        fieldName = 'abstract';
-        content = this.artist.abstract;
+        fieldName = 'shortDescriptionArtist';
+        content = this.artist.shortDescriptionArtist;
         break;
 
       case 'descriptionArtist':
@@ -130,9 +150,9 @@ allowedToModify =true;
         this.artist.nameArtist = data.content;
         break;
 
-      case 'abstract':
+      case 'shortDescriptionArtist':
 
-        this.artist.abstract = data.content;
+        this.artist.shortDescriptionArtist = data.content;
         break;
 
       case 'descriptionArtist':
@@ -144,39 +164,62 @@ allowedToModify =true;
 
   handleSubmit() {
 
+    let departementsArray1:any[] = [];
+
+    for(let dept of this.artist.departements){
+      departementsArray1.push( {nomDepartements : dept});
+    }
+
+
+
     // creation de l'objet qui sera envoyer au serveur
 
     const data = {
+      id: this.artist.id,
       nameArtist: this.artist.nameArtist,
-      mailArtist: this.emailCtrl.value,
+      contactMail: this.emailCtrl.value,
       descriptionArtist: this.artist.descriptionArtist,
-      urlImage: this.artist.img_url,
-      shortDescriptionArtist: this.artist.abstract,
+      urlImage: this.artist.urlImage,
+      shortDescriptionArtist: this.artist.shortDescriptionArtist,
       contactPhone: this.phoneCtrl.value,
       urlSiteArtist: this.websiteCtrl.value,
-      departementArtis: this.artist.counties
+      departments: departementsArray1
 
     };
 
 
-    this.artistService.updateArtist(data);
+   // this.artistService.updateArtist(data);
 
-   // console.log('formulaire final :', data);
+    console.log('formulaire final :', data);
   }
 
-  disableForm() {
-    this.artistForm.disable();
-  }
-
-  ngOnInit() {
+  async ngOnInit() {
     let id: any;
      this.route.paramMap.subscribe((params: ParamMap) => {
       id = params.get('id');
     });
 
-     const pouet = this.artistService.getArtist(id);
+    this.allowedToModify = this.userService.matchUserArtist(id);
 
 
+    let resp = await this.artistService.getArtist(id).then(p => resp = p, p => resp = p);
+
+    if(resp.status === 404){
+      this.router.navigate([PATH_USER]);
+    }
+    console.log('artistGet', resp);
+
+    let departementsArray:any[] = [];
+
+    for(let dept of resp.departments){
+      departementsArray.push( dept.nomDepartements);
+    }
+
+
+   this.artist = await resp;
+
+
+    this.artist.departements = departementsArray;
   }
 
 }

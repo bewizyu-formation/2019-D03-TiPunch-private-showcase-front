@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { UserRepository } from './user.repository';
-import { HttpResponse } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {UserRepository} from './user.repository';
+import {HttpResponse} from '@angular/common/http';
 
 import {SpringApiServicesService} from '../services/spring-api-services.service';
 import {reject} from 'q';
@@ -15,8 +15,9 @@ export class UserService {
    * Authentification JWT Token
    */
   public token = localStorage.getItem('token') || undefined;
-  public user :any;
-  constructor(private userRepository: UserRepository,private springApi:SpringApiServicesService) {
+  public user: any;
+
+  constructor(private userRepository: UserRepository, private springApi: SpringApiServicesService) {
   }
 
   /**
@@ -34,7 +35,9 @@ export class UserService {
           resolve(response.status);
         })
 
-        .catch((response: HttpResponse<any>) => { reject(response.status); });
+        .catch((response: HttpResponse<any>) => {
+          reject(response.status);
+        });
     });
   }
 
@@ -50,5 +53,19 @@ export class UserService {
           resolve(this.token);
         });
     });
+  }
+
+  matchUserArtist(idArtist: number): boolean {
+
+    let result: any = false;
+
+    for (const userArtist of this.user.listArtist) {
+
+      if (userArtist.id == idArtist) {
+        result = true;
+      }
+    }
+
+    return result;
   }
 }

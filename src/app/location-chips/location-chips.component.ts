@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
 import {FormBuilder, FormControl} from '@angular/forms';
@@ -9,10 +9,10 @@ import {GeoServicesService} from '../services/geo-services.service';
   templateUrl: './location-chips.component.html',
   styleUrls: ['./location-chips.component.css']
 })
-export class LocationChipsComponent implements OnInit {
+export class LocationChipsComponent implements OnInit, OnChanges {
 
   @Input()
-  counties: any;
+  departements: any;
 
   newCountyCtrl: FormControl;
   countiesList: any[] = [];
@@ -34,13 +34,14 @@ export class LocationChipsComponent implements OnInit {
 
 
   add(event: MatChipInputEvent): void {
+    console.log(event);
     if (!this.matAutocomplete.isOpen) {
       const input = event.input;
       const value = event.value;
 
       // Add our fruit
       if ((value || '').trim()) {
-        this.counties.push(value.trim());
+        this.departements.push(value.trim());
       }
 
       // Reset the input value
@@ -52,25 +53,31 @@ export class LocationChipsComponent implements OnInit {
     }
   }
   remove(county: any): void {
-    const index = this.counties.indexOf(county);
+    const index = this.departements.indexOf(county);
 
     if (index >= 0) {
-      this.counties.splice(index, 1);
+      this.departements.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.counties.push(event.option.viewValue);
+    this.departements.push(event.option.viewValue);
     this.countyInput.nativeElement.value = '';
     this.newCountyCtrl.setValue(null);
   }
 
 
   ngOnInit() {
+    console.log('dept',this.departements);
     this.newCountyCtrl.valueChanges.subscribe(value => {
       this.geoService.getCounties(value).then((data: any[]) => this.countiesList = data);
+
     });
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('CHANGES', changes);
   }
 }
 

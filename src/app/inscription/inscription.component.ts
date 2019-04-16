@@ -57,7 +57,8 @@ export class InscriptionComponent implements OnInit {
       username: this.usernameCtrl,
       password: this.passwordCtrl,
       mail: this.emailCtrl,
-      city: this.cityCtrl
+      city: this.cityCtrl,
+
     });
 
   }
@@ -77,7 +78,6 @@ export class InscriptionComponent implements OnInit {
           nameArtist: artistFormGroup.nameArtist
         }
       };
-      console.log('data Inscrip', data);
       let value;
 
       this.artistService.addArtist(data).then(resp => value = resp.status).then(() => {
@@ -93,7 +93,16 @@ export class InscriptionComponent implements OnInit {
   async handleSubmit() {
     let value;
     if (this.displayArtistFields === false) {
-      this.userService.addUser(this.userForm.value).then(resp => value = resp.status).then(() => {
+
+      const data = {
+        username: this.usernameCtrl.value,
+        password: this.passwordCtrl.value,
+        mail: this.emailCtrl.value,
+        city: this.cityCtrl.value,
+        artist: null
+      };
+
+      this.userService.addUser(data).then(resp => value = resp.status).then(() => {
         if (value == 200) {
           this.router.navigate([PATH_LOGIN]);
         }

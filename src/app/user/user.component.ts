@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
 
 
   NavigateToArtist() {
-    this.router.navigate(['artist/5']);
+    this.router.navigate(['artist/6']);
   }
 
   async ngOnInit() {

@@ -12,7 +12,7 @@ export class UserServicesService {
 
 
   user: User;
-  async addUser(newUser: User): Promise<any> {
+  async addUser(newUser: any): Promise<any> {
 
     let resp;
     await this.ApiService.addUser(newUser).toPromise().then(p => resp = p,p=>resp = p
