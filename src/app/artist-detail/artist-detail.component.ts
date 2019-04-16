@@ -3,7 +3,10 @@ import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogArtistComponent} from '../dialog-artist/dialog-artist.component';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ArtistServicesService} from '../services/artist-services.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { HelloRepository } from '../hello/hello.repository';
+import { PATH_HOME, PATH_USER } from '../app.routes.constantes';
+import { SpringApiServicesService } from '../services/spring-api-services.service';
 
 @Component({
   selector: 'app-artist-detail',
@@ -43,7 +46,7 @@ allowedToModify =true;
   websiteCtrl: FormControl;
   artistForm: FormGroup;
 
-  constructor(private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService, private route: ActivatedRoute) {
+  constructor(private api:SpringApiServicesService,private router: Router,private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService, private route: ActivatedRoute) {
 
 
     this.emailCtrl = fb.control(this.artist.mailArtist, [Validators.email]);
@@ -178,5 +181,24 @@ allowedToModify =true;
 
 
   }
+  selecetdFile: File;
+  imagePreview: ArrayBuffer|String;
+  onFileUpload(event) {
 
+    this.selecetdFile = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      this.imagePreview = reader.result;
+      this.api.uploadFile(this.selecetdFile,this.route.snapshot.paramMap.get('id'))
+        .subscribe(
+          () => console.log('Upload success'),
+          error => console.log('Upload error', error),
+        );
+    };
+    reader.readAsDataURL(this.selecetdFile);
+  }
+  NavigateToUser() {
+    this.router.navigate([PATH_USER]);
+  }
 }

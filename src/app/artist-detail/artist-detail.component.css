@@ -58,6 +58,7 @@ img.artist{
 }
 .text{
   width: 70%;
+  margin-bottom: 18px;
 }
 
 .contacts, .location{
@@ -100,7 +101,7 @@ button{
   background-color: #9b9b9b;
 }
 .Nom-de-lartiste {
-  width: 171px;
+  width: auto;
   height: 28px;
   font-family: Roboto;
   font-size: 24px;
@@ -195,4 +196,9 @@ button{
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+}
+.dimentionnement{
+  width: inherit;
+  height: inherit;
+
 }
