@@ -43,7 +43,7 @@
     cursor:  pointer;
   }
   .Subtitle-here {
-    margin-left:18px;
+    margin:10px 0 0 18px;
     width: 107px;
     height: 20px;
     font-family: Roboto;
@@ -56,7 +56,7 @@
     color: #ffffff;
   }
   .Title-goes-here {
-    margin-left:18px;
+    margin:10px 0 0 18px;
     width: auto;
     height: 32px;
     font-family: Roboto;
