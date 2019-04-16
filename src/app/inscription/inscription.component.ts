@@ -33,6 +33,7 @@ export class InscriptionComponent implements OnInit {
   passwordsGroup: FormGroup;
 
 
+
   constructor(fb: FormBuilder, private uniqueLogin: UniqueLoginValidatorService,
     private userService: UserServicesService, private artistService: ArtistServicesService,
     private router: Router, private userServiceLogin: UserService, private geoService: GeoServicesService ) {
@@ -71,17 +72,21 @@ export class InscriptionComponent implements OnInit {
 
       const data = {
         username: this.usernameCtrl.value,
-        passwordArtist: this.passwordCtrl.value,
-        mailArtist: this.emailCtrl.value,
-        cityArtist: this.cityCtrl.value,
-        descriptionArtist: artistFormGroup.description,
-        nameArtist: artistFormGroup.nameArtist
+        password: this.passwordCtrl.value,
+        mail: this.emailCtrl.value,
+        city: this.cityCtrl.value,
+        artist:  {
+          descriptionArtist: artistFormGroup.description,
+          nameArtist: artistFormGroup.nameArtist
+        }
       };
       let value;
-      this.artistService.addArtist(data).then(resp => value = resp);
-      if (value !== null) {
-        this.router.navigate([PATH_LOGIN]);
-      }
+
+      this.artistService.addArtist(data).then(resp => value = resp.status).then(() => {
+        if (value == 200) {
+          this.router.navigate([PATH_LOGIN]);
+        }
+      });
     }
   }
 
@@ -89,11 +94,20 @@ export class InscriptionComponent implements OnInit {
   async handleSubmit() {
     let value;
     if (this.displayArtistFields === false) {
-      this.userService.addUser(this.userForm.value).then(resp => value = resp);
-      console.log(value);
-      if (value !== null) {
-        this.router.navigate([PATH_LOGIN]);
-      }
+
+      const data = {
+        username: this.usernameCtrl.value,
+        password: this.passwordCtrl.value,
+        mail: this.emailCtrl.value,
+        city: this.cityCtrl.value,
+        artist: null
+      };
+
+      this.userService.addUser(data).then(resp => value = resp.status).then(() => {
+        if (value == 200) {
+          this.router.navigate([PATH_LOGIN]);
+        }
+      });
     }
   }
   // vides les champs users
@@ -115,9 +129,11 @@ export class InscriptionComponent implements OnInit {
       this.displayArtistFields = false;
     }
   }
+
   NavigateToHome() {
     this.router.navigate([PATH_HOME]);
   }
+
 
   // Relatif a l'autocomplete
   private _filter(name: string): string[] {

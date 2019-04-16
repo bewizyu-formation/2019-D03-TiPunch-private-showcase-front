@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArtistModifComponent } from './artist-modif.component';
+import { DialogArtistComponent } from './dialog-artist.component';
 
-describe('ArtistModifComponent', () => {
-  let component: ArtistModifComponent;
-  let fixture: ComponentFixture<ArtistModifComponent>;
+describe('DialogArtistComponent', () => {
+  let component: DialogArtistComponent;
+  let fixture: ComponentFixture<DialogArtistComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArtistModifComponent ]
+      declarations: [ DialogArtistComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArtistModifComponent);
+    fixture = TestBed.createComponent(DialogArtistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

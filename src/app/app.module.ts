@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
 import {environment} from '../environments/environment';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -22,11 +21,20 @@ import {EventModifComponent} from './event-modif/event-modif.component';
 import {UserModifComponent} from './user-modif/user-modif.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {ArtistDetailComponent} from './artist-detail/artist-detail.component';
-import {ArtistModifComponent} from './artist-modif/artist-modif.component';
 import {InscriptionArtistComponent} from './inscription-artist/inscription-artist.component' ;
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatMenuModule} from '@angular/material';
+import {
+  ErrorStateMatcher,
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCheckboxModule, MatChipsModule,
+  MatDialogModule, MatIconModule,
+  MatInputModule, ShowOnDirtyErrorStateMatcher, MatMenuModule
+} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { DialogArtistComponent } from './dialog-artist/dialog-artist.component';
+import { LocationChipsComponent } from './location-chips/location-chips.component';
+
 
 @NgModule({
   declarations: [
@@ -43,8 +51,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     UserModifComponent,
     UserDetailComponent,
     ArtistDetailComponent,
-    ArtistModifComponent,
     InscriptionArtistComponent,
+    DialogArtistComponent,
+    LocationChipsComponent,
 
   ],
   imports: [
@@ -58,6 +67,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatCheckboxModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatDialogModule,
+    MatIconModule,
+    MatChipsModule,
+    MatAutocompleteModule,
     MatMenuModule
   ],
   providers: [
@@ -65,9 +78,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     {provide: HTTP_INTERCEPTORS, useClass: CommonHeadersInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true},
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
 
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogArtistComponent]
 })
 export class AppModule {
 }
