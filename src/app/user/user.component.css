@@ -44,8 +44,8 @@
   }
   .Subtitle-here {
     margin:10px 0 0 18px;
-    width: 107px;
-    height: 20px;
+    width: 100%;
+    height: auto;
     font-family: Roboto;
     font-size: 13px;
     font-weight: normal;
@@ -88,6 +88,7 @@
     position: relative;
     width: 100%;
     height: auto;
+    min-height: 300px;
   }
   .bottom{
     display: flex;

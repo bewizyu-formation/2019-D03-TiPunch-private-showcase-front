@@ -30,10 +30,10 @@
   </div>
   <div class="bottom">
     <div class="image-placeholder" *ngFor="let artiste of this.artistes">
-      <img src={{image}} class="img">
+      <img src={{artiste.image}} class="img">
       <div class="scrim">
         <h5 class="Title-goes-here">{{artiste?.nameArtist}}</h5>
-        <p class="Subtitle-here">{{artiste?.descriptionArtist}}</p>
+        <p class="Subtitle-here">{{artiste?.shortDescriptionArtist}}</p>
         <div class="dessous">
           <span class="stars" [ngSwitch]="artiste.noteArtist">
             <span class="mark" *ngSwitchCase="0">
