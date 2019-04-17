@@ -45,7 +45,8 @@ export class UserService {
   }
 
   async getUser() {
-    await this.springApi.getOneUser().then(p => localStorage.setItem('user', JSON.stringify(p)));
+    await this.springApi.getOneUser().then(p => localStorage.setItem('user', JSON.stringify(p)))
+    .then(()=>this.user = localStorage.getItem('user'));
 
   }
 
