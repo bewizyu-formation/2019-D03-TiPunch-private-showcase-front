@@ -15,7 +15,7 @@ export class UserServicesService {
   async addUser(newUser: any): Promise<any> {
 
     let resp;
-    await this.ApiService.addUser(newUser).toPromise().then(p => resp = p,p=>resp = p
+    await this.ApiService.addUser(newUser).toPromise().then(p => resp = p, p => resp = p
     );
     await console.log(resp);
     return await resp;

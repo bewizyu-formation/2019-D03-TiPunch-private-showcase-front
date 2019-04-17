@@ -1,3 +1,64 @@
-<p>
-  profile works!
-</p>
+<div class="container">
+  <div class="app-bar-bg">
+    <div class="button-bg">
+      <a class="return" (click)="navigateToHome()">&larr;</a>
+    </div>
+    <h1 class="Private-ShowCase">Private&nbsp;showcase</h1>
+    <div class="vide">
+    </div>
+  </div>
+  <div class="bottom">
+    <img src="../../assets/banni-re.jpg" srcset="../../assets/banni-re@2x.jpg 2x,
+      ../../assets/banni-re@3x.jpg 3x" class="Bannire">
+    <div class="Fond">
+      <h3 class="title">Profil user</h3>
+      <form (ngSubmit)="handleSubmit()" [formGroup]="userForm" class="change-password">
+
+        <mat-form-field class="bounds">
+          <input matInput type="password" placeholder="Ancien mot de passe" value="" [formControl]="lastPasswordCtrl">
+          <mat-error class="error" *ngIf="lastPasswordCtrl.dirty && lastPasswordCtrl.hasError('required')">Le champ ancien mot de passe est
+            obligatoire
+          </mat-error>
+        </mat-form-field>
+
+        <div class="divPwd" [formGroup]="passwordsGroup">
+          <mat-form-field class="bounds">
+            <input matInput type="password" placeholder="Nouveau mot de passe" value="" [formControl]="passwordCtrl">
+            <mat-error class="error" *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">Le champ mot de passe est
+              obligatoire
+            </mat-error>
+
+            <mat-error class="error" *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('pattern')">Le champ mot de passe doit
+              contenir 8 caractères (au moins une minuscule, une majuscule et un chiffre)</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="bounds">
+            <input matInput type="password" placeholder="Confirmez le nouveau mot de passe" value=""
+              [formControl]="password2Ctrl">
+            <mat-error class="error" *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('passwordValid')">Les champs mot de passe
+              doivent
+              être
+              identiques</mat-error>
+            <mat-error class="error" *ngIf="password2Ctrl.dirty && password2Ctrl.hasError('required')">Le champ mot de passe est
+              obligatoire
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field class="bounds">
+          <input matInput type="email" placeholder="Email" value="" [formControl]="emailCtrl">
+          <mat-error class="error" *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">Le champ email n'est pas valide</mat-error>
+          <mat-error class="error" *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">Le champ email est obligatoire</mat-error>
+        </mat-form-field>
+        <div class="buttons">
+          <span>
+            <button mat-button type="reset" (click)="handleClear()" class="button-bg-gris">Annuler</button>
+          </span>
+          <span>
+            <button mat-button type="submit" class="button-bg-vert" [disabled]="userForm.invalid">Valider</button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

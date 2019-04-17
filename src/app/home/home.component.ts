@@ -11,9 +11,7 @@ import {UserService} from '../user-service/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router, private userService: UserService) {
-  }
-
+  constructor(private router: Router, public userService: UserService) { }
   NavigateToLogin() {
     this.router.navigate([PATH_LOGIN]);
   }

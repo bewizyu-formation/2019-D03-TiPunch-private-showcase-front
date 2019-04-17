@@ -26,7 +26,7 @@ export class SpringApiServicesService {
     return this.http.put(`${API_BASE_URL}${API_USER}`, user);
   }
 
-  updateUser(user: User) {
+  updateUser(...user) {
     console.log('updateUser');
     // return this.http.put(`${API_BASE_URL}${API_USER}${user.id}`, user);
   }
@@ -42,7 +42,6 @@ export class SpringApiServicesService {
   }
 
   getOneArtist(id: string) {
-
     return this.http.get(`${API_BASE_URL}${'/artists/'}${id}`);
   }
 
