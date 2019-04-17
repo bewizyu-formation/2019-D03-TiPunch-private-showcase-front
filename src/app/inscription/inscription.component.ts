@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { passwordValid } from '../validators/validator-user-artist';
-import { UniqueLoginValidatorService } from '../validators/unique-login-validator.service';
-import { UserServicesService } from '../services/user-services.service';
-import { ArtistServicesService } from '../services/artist-services.service';
-import { Router } from '@angular/router';
-import { PATH_HOME, PATH_USER, PATH_LOGIN } from '../app.routes.constantes';
-import { UserService } from '../user-service/user.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {passwordValid} from '../validators/validator-user-artist';
+import {UniqueLoginValidatorService} from '../validators/unique-login-validator.service';
+import {UserServicesService} from '../services/user-services.service';
+import {ArtistServicesService} from '../services/artist-services.service';
+import {Router} from '@angular/router';
+import {PATH_HOME, PATH_USER, PATH_LOGIN} from '../app.routes.constantes';
+import {UserService} from '../user-service/user.service';
 import {GeoServicesService} from '../services/geo-services.service';
 
 @Component({
@@ -34,8 +34,8 @@ export class InscriptionComponent implements OnInit {
 
 
   constructor(fb: FormBuilder, private uniqueLogin: UniqueLoginValidatorService,
-    private userService: UserServicesService, private artistService: ArtistServicesService,
-    private router: Router, private userServiceLogin: UserService, private geoService: GeoServicesService ) {
+              private userService: UserServicesService, private artistService: ArtistServicesService,
+              private router: Router, private userServiceLogin: UserService, private geoService: GeoServicesService) {
 
     // mise en places des control avec les différents validator
     this.usernameCtrl = fb.control('', [Validators.required], [this.uniqueLogin.usernameExists]);
@@ -74,7 +74,7 @@ export class InscriptionComponent implements OnInit {
         password: this.passwordCtrl.value,
         mail: this.emailCtrl.value,
         city: this.cityCtrl.value,
-        artist:  {
+        artist: {
           descriptionArtist: artistFormGroup.description,
           nameArtist: artistFormGroup.nameArtist
         }
@@ -129,6 +129,7 @@ export class InscriptionComponent implements OnInit {
       this.displayArtistFields = false;
     }
   }
+
   NavigateToHome() {
     this.router.navigate([PATH_HOME]);
   }
@@ -144,7 +145,7 @@ export class InscriptionComponent implements OnInit {
   ngOnInit() {
 
     this.cityCtrl.valueChanges.subscribe(value => {
-      this.geoService.getCities(value).then((data: any[]) => this.options =  data);
+      this.geoService.getCities(value).then((data: any[]) => this.options = data);
     });
   }
 
