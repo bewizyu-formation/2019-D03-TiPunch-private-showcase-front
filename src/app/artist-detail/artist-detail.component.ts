@@ -156,9 +156,9 @@ export class ArtistDetailComponent implements OnInit {
 
   handleSubmit() {
 
-    let departementsArray1: any[] = [];
+    const departementsArray1: any[] = [];
 
-    for (let dept of this.artist.departements) {
+    for (const dept of this.artist.departements) {
       departementsArray1.push({nomDepartements: dept});
     }
 

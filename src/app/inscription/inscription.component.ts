@@ -82,7 +82,7 @@ export class InscriptionComponent implements OnInit {
       let value;
 
       this.artistService.addArtist(data).then(resp => value = resp.status).then(() => {
-        if (value == 200) {
+        if (value === 200) {
           this.router.navigate([PATH_LOGIN]);
         }
       });
@@ -103,7 +103,7 @@ export class InscriptionComponent implements OnInit {
       };
 
       this.userService.addUser(data).then(resp => value = resp.status).then(() => {
-        if (value == 200) {
+        if (value === 200) {
           this.router.navigate([PATH_LOGIN]);
         }
       });

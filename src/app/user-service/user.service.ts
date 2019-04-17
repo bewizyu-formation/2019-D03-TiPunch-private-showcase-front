@@ -6,7 +6,6 @@ import {SpringApiServicesService} from '../services/spring-api-services.service'
 import {reject} from 'q';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -64,7 +63,7 @@ export class UserService {
 
     for (const userArtist of this.user.listArtist) {
 
-      if (userArtist.id == idArtist) {
+      if (userArtist.id === idArtist) {
         result = true;
       }
     }
