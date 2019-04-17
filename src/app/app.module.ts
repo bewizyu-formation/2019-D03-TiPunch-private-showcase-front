@@ -32,7 +32,6 @@ import {
   MatDialogModule, MatIconModule,
   MatInputModule, ShowOnDirtyErrorStateMatcher, MatMenuModule
 } from '@angular/material';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DialogArtistComponent } from './dialog-artist/dialog-artist.component';
 import { LocationChipsComponent } from './location-chips/location-chips.component';
 import { SafeHtmlPipe } from './artist-detail/sanitize.pipe';
