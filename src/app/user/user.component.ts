@@ -13,14 +13,16 @@ export class UserComponent implements OnInit {
   artistes;
   image = 'http://placekitten.com/g/200/200';
   constructor(private router: Router, private springApiServicesService: SpringApiServicesService, private userService: UserService) { }
-  ngOnInit() {
-    this.springApiServicesService.getListArtists().toPromise().then(p => this.artistes = p).then(() => {
+  async ngOnInit() {
+    await this.springApiServicesService.getListArtists().toPromise().then(p => this.artistes = p).then(() => {
       // génération aléatoire de valeurs note et votes
       for (let i = 0; i < this.artistes.length; i++) {
         this.artistes[i].noteArtist = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
         this.artistes[i].nbVote = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
       }
     });
+
+
   }
   navigateToArtist(id) {
     this.router.navigate([PATH_ARTIST, id]);
@@ -35,6 +37,5 @@ export class UserComponent implements OnInit {
     localStorage.removeItem('token');
     this.userService.token = undefined;
     this.router.navigate([PATH_HOME]);
-
   }
 }

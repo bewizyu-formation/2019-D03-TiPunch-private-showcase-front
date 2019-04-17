@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UniqueLoginValidatorService} from '../validators/unique-login-validator.service';
-import { Router } from '@angular/router';
-import { PATH_HOME } from '../app.routes.constantes';
+import {Router} from '@angular/router';
+import {PATH_HOME} from '../app.routes.constantes';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class InscriptionArtistComponent implements OnInit {
 
     this.nameArtistCtrl = fb.control('', [Validators.required], [this.uniqueLogin.artistNameExists]);
     this.descriptionCtrl = fb.control('', [Validators.required,
-      Validators.pattern("^[a-zA-Z0-9-\\_\\ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.!:;,\\(\\)\\']{3,}$")]);
+      Validators.pattern('^[a-zA-Z0-9-\\_\\ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.!:;,\\(\\)\\\']{3,}$')]);
 
     this.artistFormGroup = fb.group({
       nameArtist: this.nameArtistCtrl,

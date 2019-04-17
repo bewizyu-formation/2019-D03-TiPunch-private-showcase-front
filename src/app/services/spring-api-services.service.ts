@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../model/User';
-import { Artist } from '../model/Artist';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {User} from '../model/User';
+import {Artist} from '../model/Artist';
 
 const API_BASE_URL = 'http://localhost:8080';
 const API_USER = '/users/';
 const API_ARTIST = 'artist/';
 const API_COUNTIES = '/departements/';
 const API_CITIES = '/communes/';
+const API_IMAGE = '/upload';
 
 
 @Injectable({
@@ -20,10 +21,7 @@ export class SpringApiServicesService {
 
   // Appels api User
 
-
-
   addUser(user: User) {
-
 
     return this.http.put(`${API_BASE_URL}${API_USER}`, user);
   }
@@ -40,7 +38,7 @@ export class SpringApiServicesService {
   // Appels Api Artists
 
   getListArtists() {
-     return this.http.get(`${API_BASE_URL}${API_USER}${API_ARTIST}list`);
+    return this.http.get(`${API_BASE_URL}${API_USER}${API_ARTIST}list`);
   }
 
   getOneArtist(id: string) {
@@ -48,14 +46,17 @@ export class SpringApiServicesService {
     return this.http.get(`${API_BASE_URL}${'/artists/'}${id}`);
   }
 
-  addArtist(data: any) {
+  getOneArtistImg(id: string) {
 
+    return this.http.get(`${API_BASE_URL}${'/images/'}${id}`, {responseType: 'blob'});
+  }
+
+  addArtist(data: any) {
 
     return this.http.put(`${API_BASE_URL}${API_USER}${API_ARTIST}`, data);
   }
 
   updateArtist(artist: Artist) {
-
 
     return this.http.put(`${API_BASE_URL}${'/artists/'}${artist.id}`, artist);
   }
@@ -97,7 +98,25 @@ export class SpringApiServicesService {
 
   }
 
-  getCounties(county: string){
+  getCounties(county: string) {
     return this.http.get(`${API_BASE_URL}${API_COUNTIES}${'?nom='}${county}`).toPromise();
+  }
+
+
+  uploadFile(file: File, id: any) {
+
+    const fd: FormData = new FormData();
+    fd.append('pictureName', file.name);
+    fd.append('file', file);
+    console.log(`${API_BASE_URL}${'/artists/'}${id}${API_IMAGE}`);
+    console.log(`${file.name}`);
+    return this.http.post(
+      `${API_BASE_URL}${'/artists/'}${id}${API_IMAGE}`,
+      fd,
+      {
+        reportProgress: true,
+        responseType: 'text'
+      }
+    );
   }
 }

@@ -7,6 +7,9 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {UserService} from '../user-service/user.service';
 import {PATH_USER} from '../app.routes.constantes';
 import {Artist} from '../model/Artist';
+import {SpringApiServicesService} from '../services/spring-api-services.service';
+import {UserServicesService} from '../services/user-services.service';
+import {SafeHtmlPipe} from './sanitize.pipe';
 
 @Component({
   selector: 'app-artist-detail',
@@ -31,7 +34,12 @@ export class ArtistDetailComponent implements OnInit {
     shortDescriptionArtist: '',
     urlImage: '',
   };
+
   allowedToModify = false;
+
+  // Pour l'upload d'image
+  selecetdFile: File;
+  imagePreview: ArrayBuffer | string;
 
 
   // initialisation des champs
@@ -40,8 +48,9 @@ export class ArtistDetailComponent implements OnInit {
   websiteCtrl: FormControl;
   artistForm: FormGroup;
 
-  constructor(private dialog: MatDialog, fb: FormBuilder, private artistService: ArtistServicesService,
-              private route: ActivatedRoute, private userService: UserService, private router: Router) {
+  constructor(private api: SpringApiServicesService, private dialog: MatDialog,
+              fb: FormBuilder, private artistService: ArtistServicesService,
+              private route: ActivatedRoute, private userService: UserService, private router: Router, private sanitize: SafeHtmlPipe) {
 
 
     this.emailCtrl = fb.control(this.artist.contactMail ? this.artist.contactMail : '', [Validators.email]);
@@ -147,9 +156,9 @@ export class ArtistDetailComponent implements OnInit {
 
   handleSubmit() {
 
-    let departementsArray1: any[] = [];
+    const departementsArray1: any[] = [];
 
-    for (let dept of this.artist.departements) {
+    for (const dept of this.artist.departements) {
       departementsArray1.push({nomDepartements: dept});
     }
 
@@ -171,7 +180,29 @@ export class ArtistDetailComponent implements OnInit {
 
     this.artistService.updateArtist(data);
 
+  }
 
+  onFileUpload(event) {
+
+    if (this.allowedToModify) {
+
+      this.selecetdFile = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        this.imagePreview = reader.result;
+        this.api.uploadFile(this.selecetdFile, this.route.snapshot.paramMap.get('id'))
+          .subscribe(
+            () => console.log('Upload success'),
+            error => console.log('Upload error', error),
+          );
+      };
+      reader.readAsDataURL(this.selecetdFile);
+    }
+  }
+
+  navigateToUser() {
+    this.router.navigate([PATH_USER]);
   }
 
   async ngOnInit() {
@@ -191,15 +222,21 @@ export class ArtistDetailComponent implements OnInit {
 
     // charge les departements dans les departements d'artiste en les transformant en tableau d'objet pour les chips
 
-    let departementsArray: any[] = [];
-
-    for (let dept of resp.departments) {
-      departementsArray.push(dept.nomDepartements);
-    }
-
 
     this.artist = await resp;
-    this.artist.departements = departementsArray;
+    this.artist.departements = resp.departments.map(dept => dept.nomDepartements);
+
+    try {
+      const blob = await this.artistService.getArtistImg(id);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        console.log('LOADED', reader);
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(blob);
+    } catch (e) {
+      console.log('ERROR IMAGE', e);
+    }
   }
 
 }

@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {SpringApiServicesService} from './spring-api-services.service';
 import {UserService} from '../user-service/user.service';
-import {PATH_LOGIN, PATH_USER} from '../app.routes.constantes';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +20,18 @@ export class ArtistServicesService {
 
    getArtist(id: string): Promise<any> {
 
-
     return this.ApiService.getOneArtist(id).toPromise();
 
   }
 
-  async updateArtist(data: any): Promise<boolean> {
-
-    let resp;
-    this.ApiService.updateArtist(data).toPromise().then(p => resp = p);
+  async updateArtist(data: any): Promise<any> {
+    let resp: any;
+    await this.ApiService.updateArtist(data).toPromise().then(p => resp = p);
     return resp;
+  }
+
+  getArtistImg(id: string): Promise<any> {
+    return this.ApiService.getOneArtistImg(id).toPromise();
+
   }
 }

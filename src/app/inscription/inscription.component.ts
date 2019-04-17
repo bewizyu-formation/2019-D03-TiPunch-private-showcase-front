@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { passwordValid } from '../validators/validator-user-artist';
-import { UniqueLoginValidatorService } from '../validators/unique-login-validator.service';
-import { UserServicesService } from '../services/user-services.service';
-import { ArtistServicesService } from '../services/artist-services.service';
-import { Router } from '@angular/router';
-import { PATH_HOME, PATH_LOGIN } from '../app.routes.constantes';
-import { UserService } from '../user-service/user.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {passwordValid} from '../validators/validator-user-artist';
+import {UniqueLoginValidatorService} from '../validators/unique-login-validator.service';
+import {UserServicesService} from '../services/user-services.service';
+import {ArtistServicesService} from '../services/artist-services.service';
+import {Router} from '@angular/router';
+import {PATH_HOME, PATH_USER, PATH_LOGIN} from '../app.routes.constantes';
+import {UserService} from '../user-service/user.service';
 import {GeoServicesService} from '../services/geo-services.service';
 
 @Component({
@@ -33,10 +33,9 @@ export class InscriptionComponent implements OnInit {
   passwordsGroup: FormGroup;
 
 
-
   constructor(fb: FormBuilder, private uniqueLogin: UniqueLoginValidatorService,
-    private userService: UserServicesService, private artistService: ArtistServicesService,
-    private router: Router, private userServiceLogin: UserService, private geoService: GeoServicesService ) {
+              private userService: UserServicesService, private artistService: ArtistServicesService,
+              private router: Router, private userServiceLogin: UserService, private geoService: GeoServicesService) {
 
     // mise en places des control avec les différents validator
     this.usernameCtrl = fb.control('', [Validators.required], [this.uniqueLogin.usernameExists]);
@@ -51,9 +50,9 @@ export class InscriptionComponent implements OnInit {
       password: this.passwordCtrl,
       passwordConfirm: this.password2Ctrl
     }, {
-        validator: passwordValid.bind(this)
+      validator: passwordValid.bind(this)
 
-      });
+    });
 
     // création d'un objet avec toute les données du formulaire
     this.userForm = fb.group({
@@ -75,7 +74,7 @@ export class InscriptionComponent implements OnInit {
         password: this.passwordCtrl.value,
         mail: this.emailCtrl.value,
         city: this.cityCtrl.value,
-        artist:  {
+        artist: {
           descriptionArtist: artistFormGroup.description,
           nameArtist: artistFormGroup.nameArtist
         }
@@ -83,7 +82,7 @@ export class InscriptionComponent implements OnInit {
       let value;
 
       this.artistService.addArtist(data).then(resp => value = resp.status).then(() => {
-        if (value == 200) {
+        if (value === 200) {
           this.router.navigate([PATH_LOGIN]);
         }
       });
@@ -104,12 +103,13 @@ export class InscriptionComponent implements OnInit {
       };
 
       this.userService.addUser(data).then(resp => value = resp.status).then(() => {
-        if (value == 200) {
+        if (value === 200) {
           this.router.navigate([PATH_LOGIN]);
         }
       });
     }
   }
+
   // vides les champs users
   handleClear() {
     this.usernameCtrl.setValue('');
@@ -145,7 +145,7 @@ export class InscriptionComponent implements OnInit {
   ngOnInit() {
 
     this.cityCtrl.valueChanges.subscribe(value => {
-      this.geoService.getCities(value).then((data: any[]) => this.options =  data);
+      this.geoService.getCities(value).then((data: any[]) => this.options = data);
     });
   }
 

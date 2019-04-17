@@ -86,7 +86,6 @@ export class LocationChipsComponent implements OnInit {
 
   }
 
-
 }
 
 

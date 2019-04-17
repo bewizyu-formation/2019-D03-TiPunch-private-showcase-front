@@ -14,7 +14,7 @@ export class LoggedInGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.userService.token == undefined) {
+    if (this.userService.token === undefined) {
       this.router.navigate([PATH_HOME]);
     }
     return this.userService.token !== undefined;

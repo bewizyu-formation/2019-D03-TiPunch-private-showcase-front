@@ -26,6 +26,7 @@ export class DialogArtistComponent implements OnInit {
     this.title = data.title;
     this.fieldName = data.fieldName;
 
+
     switch (this.fieldName) {
 
       case 'nameArtist':

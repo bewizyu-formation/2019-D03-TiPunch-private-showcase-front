@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { UserRepository } from './user.repository';
-import { HttpResponse } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {UserRepository} from './user.repository';
+import {HttpResponse} from '@angular/common/http';
 
 import {SpringApiServicesService} from '../services/spring-api-services.service';
 import {reject} from 'q';
@@ -63,7 +63,7 @@ export class UserService {
 
     for (const userArtist of this.user.listArtist) {
 
-      if (userArtist.id == idArtist) {
+      if (userArtist.id === idArtist) {
         result = true;
       }
     }
