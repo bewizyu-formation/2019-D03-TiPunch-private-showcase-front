@@ -20,7 +20,7 @@ export class SpringApiServicesService {
 
 
   addUser(user: User) {
-       return this.http.put(`${API_BASE_URL}${API_USER}`, user);
+    return this.http.put(`${API_BASE_URL}${API_USER}`, user);
   }
 
   updateUser(...user) {
@@ -31,7 +31,7 @@ export class SpringApiServicesService {
   // Appels Api Artists
 
   getListArtists() {
-     return this.http.get(`${API_BASE_URL}${API_USER}${API_ARTIST}list`);
+    return this.http.get(`${API_BASE_URL}${API_USER}${API_ARTIST}list`);
   }
 
   getOneArtist(artist: Artist) {

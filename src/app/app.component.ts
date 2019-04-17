@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {UserService} from './user-service/user.service';
-import {HelloRepository} from './hello/hello.repository';
-import {HttpErrorResponse} from '@angular/common/http';
+import { Component } from '@angular/core';
+import { UserService } from './user-service/user.service';
+import { HelloRepository } from './hello/hello.repository';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent {
   token: string;
 
   selecetdFile: File;
-  imagePreview: ArrayBuffer|String;
+  imagePreview: ArrayBuffer | String;
 
   constructor(private userService: UserService, private hello: HelloRepository) {
   }

@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   emailCtrl: FormControl;
   userForm: FormGroup;
   passwordsGroup: FormGroup;
-  constructor(fb: FormBuilder, private router: Router,private springApi:SpringApiServicesService) {
+  constructor(fb: FormBuilder, private router: Router, private springApi: SpringApiServicesService) {
     this.lastPasswordCtrl = fb.control('', [Validators.required]);
     this.passwordCtrl = fb.control('', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$')]);
     this.password2Ctrl = fb.control('', [Validators.required]);
@@ -27,24 +27,22 @@ export class ProfileComponent implements OnInit {
     }, {
         validator: passwordValid.bind(this)
       });
-      this.emailCtrl = fb.control('', [Validators.required, Validators.email]);
+    this.emailCtrl = fb.control('', [Validators.required, Validators.email]);
     this.userForm = fb.group({
       lastPassword: this.lastPasswordCtrl,
       password: this.passwordCtrl,
-      email:this.emailCtrl
+      email: this.emailCtrl
     });
   }
 
   ngOnInit() {
   }
   async handleSubmit() {
-    let send:string[] =[this.userForm.value.lastPassword,this.userForm.value.password,this.userForm.value.email];
-    
-    console.log(send)
-    this.springApi.updateUser(send)
+    const send: string[] = [this.userForm.value.lastPassword, this.userForm.value.password, this.userForm.value.email];
+    this.springApi.updateUser(send);
     this.router.navigate([PATH_LOGIN]);
   }
-  handleClear(){
+  handleClear() {
     this.lastPasswordCtrl.setValue('');
     this.passwordCtrl.setValue('');
     this.password2Ctrl.setValue('');
