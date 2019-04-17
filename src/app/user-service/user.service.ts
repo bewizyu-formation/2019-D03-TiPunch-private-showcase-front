@@ -6,9 +6,6 @@ import {SpringApiServicesService} from '../services/spring-api-services.service'
 import {reject} from 'q';
 
 
-import {SpringApiServicesService} from '../services/spring-api-services.service';
-import {reject} from 'q';
-
 
 @Injectable({
   providedIn: 'root'

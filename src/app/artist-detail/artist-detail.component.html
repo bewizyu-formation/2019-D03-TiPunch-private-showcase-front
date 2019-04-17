@@ -16,11 +16,11 @@
       <h2 class="Informations-gnrales">Presentation</h2>
       <div class="Rectangle">
         <div class="image-placeholder" (click)="selectFile.click()">
-          <input *ngIf="allowedToModify" style="display:none" type="file" (change)="onFileUpload($event)" #selectFile accept="image/*">
+          <input style="display:none" type="file" (change)="onFileUpload($event)" #selectFile accept="image/*">
           <img *ngIf="imagePreview" src={{imagePreview}} alt="" class="dimentionnement">
         </div>
         <div class="text">
-          <h3 class="Nom-de-lartiste">{{artist?.nameArtist!=='' ? artist?.nameArtist : "Veuillez remplir un nom d'artiste"t}} <!--<img *ngIf="allowedToModify" class="pencil"
+          <h3 class="Nom-de-lartiste">{{artist?.nameArtist!=='' ? artist?.nameArtist : "Veuillez remplir un nom d'artiste"}} <!--<img *ngIf="allowedToModify" class="pencil"
               src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('nameArtist')">-->
           </h3>
           <div class="Description-courte">{{artist?.shortDescriptionArtist !== '' ? artist?.shortDescriptionArtist : "Veuillez remplir une description courte"}} <img *ngIf="allowedToModify" class="pencil"

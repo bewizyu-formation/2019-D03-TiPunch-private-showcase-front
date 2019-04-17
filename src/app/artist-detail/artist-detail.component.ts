@@ -183,18 +183,21 @@ export class ArtistDetailComponent implements OnInit {
 
   onFileUpload(event) {
 
-    this.selecetdFile = event.target.files[0];
+    if(this.allowedToModify){
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      this.imagePreview = reader.result;
-      this.api.uploadFile(this.selecetdFile,this.route.snapshot.paramMap.get('id'))
-        .subscribe(
-          () => console.log('Upload success'),
-          error => console.log('Upload error', error),
-        );
-    };
-    reader.readAsDataURL(this.selecetdFile);
+      this.selecetdFile = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        this.imagePreview = reader.result;
+        this.api.uploadFile(this.selecetdFile,this.route.snapshot.paramMap.get('id'))
+          .subscribe(
+            () => console.log('Upload success'),
+            error => console.log('Upload error', error),
+          );
+      };
+      reader.readAsDataURL(this.selecetdFile);
+    }
   }
   navigateToUser() {
     this.router.navigate([PATH_USER]);
