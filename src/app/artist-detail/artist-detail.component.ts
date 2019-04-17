@@ -211,7 +211,6 @@ export class ArtistDetailComponent implements OnInit {
     });
 
     this.allowedToModify = this.userService.matchUserArtist(id);
-console.log("allowedToModify" , this.allowedToModify);
 
     let resp = await this.artistService.getArtist(id).then(p => resp = p, p => resp = p);
 

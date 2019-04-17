@@ -18,13 +18,18 @@ export class UserComponent implements OnInit {
   async ngOnInit() {
     await this.springApiServicesService.getListArtists().toPromise().then(p => this.artistes = p).then(() => {
       // génération aléatoire de valeurs note et votes
+
       for (let i = 0; i < this.artistes.length; i++) {
         this.artistes[i].noteArtist = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
         this.artistes[i].nbVote = Math.floor(Math.random() * (100000 - 0 + 100)) + 0;
 
       }
     });
+
+
+
     for (let i = 0; i < this.artistes.length; i++) {
+
       try {
         const blob = await this.artistService.getArtistImg(this.artistes[i].id);
         const reader = new FileReader();
@@ -37,6 +42,7 @@ export class UserComponent implements OnInit {
         console.log('ERROR IMAGE', e);
       }
     }
+
 
 
   }
@@ -52,6 +58,8 @@ export class UserComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this.userService.token = undefined;
+    localStorage.removeItem('user');
+    this.userService.user = undefined;
     this.router.navigate([PATH_HOME]);
   }
 }
