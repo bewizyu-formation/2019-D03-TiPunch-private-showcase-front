@@ -18,21 +18,33 @@
         <div class="image-placeholder" (click)="selectFile.click()">
           <input style="display:none" type="file" (change)="onFileUpload($event)" #selectFile accept="image/*">
           <img *ngIf="imagePreview" src={{imagePreview}} alt="" class="dimentionnement">
+          <span *ngIf="allowedToModify">Cliquez sur l'image pour la modifier</span>
         </div>
         <div class="text">
           <h3 class="Nom-de-lartiste">{{artist?.nameArtist!=='' ? artist?.nameArtist : "Veuillez remplir un nom d'artiste"}} <!--<img *ngIf="allowedToModify" class="pencil"
               src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('nameArtist')">-->
           </h3>
-          <div class="Description-courte">{{artist?.shortDescriptionArtist !== '' ? artist?.shortDescriptionArtist : "Veuillez remplir une description courte"}} <img *ngIf="allowedToModify" class="pencil"
+          <div class="Description-courte" *ngIf="allowedToModify ; else noModifShort">{{artist?.shortDescriptionArtist !== '' ? artist?.shortDescriptionArtist : "Veuillez remplir une description courte"}} <img  class="pencil"
               src="../../assets/mode-edit.svg" alt="pencil" (click)="openDialog('shortDescriptionArtist')">
           </div>
-          <div class="description-longue">
+          <ng-template #noModifShort>
+            <div class="Description-courte" >
+            {{artist?.shortDescriptionArtist !== '' ? artist?.shortDescriptionArtist : "L'artist n'a pas d'extrait"}}
+
+            </div>
+          </ng-template>
+          <div class="description-longue"  *ngIf="allowedToModify ; else noModifLg" >
             <span class="description-longue-texte">{{artist?.descriptionArtist!==''? artist?.descriptionArtist : "Veuillez remplir une description longue"}}</span>
-            <span><img *ngIf="allowedToModify" class="pencil" src="../../assets/mode-edit.svg" alt="pencil"
+            <span><img class="pencil" src="../../assets/mode-edit.svg" alt="pencil"
                 (click)="openDialog('descriptionArtist')"></span>
-
-
           </div>
+          <ng-template #noModifLg >
+            <div class="description-longue" >
+              <span class="description-longue-texte">{{artist?.descriptionArtist!==''? artist?.descriptionArtist : "L'aartist n'a pas de description"}}</span>
+
+            </div>
+
+          </ng-template>
         </div>
       </div>
 
@@ -85,21 +97,24 @@
           <div class="contacts noInput">
             <div class="fields">
               <mat-icon>alternate_email</mat-icon>
-              {{artist?.urlSiteArtist}}
+              <span>{{artist?.urlSiteArtist ? artist?.urlSiteArtist : "l\'artiste n\'a pas renseigner cette information"}}</span>
             </div>
             <div class="fields">
               <mat-icon>phone</mat-icon>
-              {{artist?.contactPhone}}
+              <span> {{artist?.contactPhone ? artist?.contactPhone : "l\'artiste n\'a pas renseigner cette information"}}</span>
             </div>
             <div class="fields">
               <mat-icon>email</mat-icon>
-              {{artist?.contactMail}}
+              <span>{{artist?.contactMail ? artist?.contactMail  : "l\'artiste n\'a pas renseigner cette information"}}</span>
             </div>
           </div>
         </ng-template>
         <div class="baisser-le-bouton">
           <div class="location">
-            <h5 class="Slctionnez-les-d">Sélectionnez le(s) département(s) pour vos concerts :</h5>
+            <h5 class="Slctionnez-les-d" *ngIf="allowedToModify; else noModifCounty">Sélectionnez le(s) département(s) pour vos concerts :</h5>
+            <ng-template class="Slctionnez-les-d" #noModifCounty>
+              <h5 class="Slctionnez-les-d">Mobilité</h5>
+            </ng-template>
             <app-location-chips [departements]="artist.departements"
                                 [allowedToModify]="allowedToModify"></app-location-chips>
           </div>

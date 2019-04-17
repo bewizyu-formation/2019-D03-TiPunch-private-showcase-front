@@ -8,7 +8,6 @@ import {UserService} from '../user-service/user.service';
 import {PATH_USER} from '../app.routes.constantes';
 import {Artist} from '../model/Artist';
 import {SpringApiServicesService} from '../services/spring-api-services.service';
-import {UserServicesService} from '../services/user-services.service';
 import {SafeHtmlPipe} from './sanitize.pipe';
 
 @Component({
@@ -212,7 +211,7 @@ export class ArtistDetailComponent implements OnInit {
     });
 
     this.allowedToModify = this.userService.matchUserArtist(id);
-
+console.log("allowedToModify" , this.allowedToModify);
 
     let resp = await this.artistService.getArtist(id).then(p => resp = p, p => resp = p);
 

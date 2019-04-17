@@ -4,6 +4,7 @@ import {HttpResponse} from '@angular/common/http';
 
 import {SpringApiServicesService} from '../services/spring-api-services.service';
 import {reject} from 'q';
+import {User} from '../model/User';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class UserService {
    * Authentification JWT Token
    */
   public token = localStorage.getItem('token') || undefined;
-  public user: any;
+  public user = localStorage.getItem('user') || undefined;
 
   constructor(private userRepository: UserRepository, private springApi: SpringApiServicesService) {
   }
@@ -44,7 +45,8 @@ export class UserService {
   }
 
   async getUser() {
-    await this.springApi.getOneUser().then(p => this.user = p);
+    await this.springApi.getOneUser().then(p => localStorage.setItem('user', JSON.stringify(p)));
+
   }
 
   logged(username: string, password: string): Promise<any> {
@@ -61,10 +63,16 @@ export class UserService {
 
     let result: any = false;
 
-    for (const userArtist of this.user.listArtist) {
+    if (this.user !== undefined) {
 
-      if (userArtist.id === idArtist) {
-        result = true;
+      const userObj = JSON.parse(this.user);
+
+
+      for (const userArtist of userObj.listArtist) {
+
+        if (userArtist.id == idArtist) {
+          result = true;
+        }
       }
     }
 
