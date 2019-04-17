@@ -20,6 +20,9 @@
   width: 290px;
   height: 32px;
   font-size: 36px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
   line-height: 0.89;
 }
 .button-bg {
@@ -29,7 +32,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  flex-direction:space-between;
   cursor:  pointer;
 }
 .return{
@@ -37,7 +39,7 @@
   margin-left: 5px;
 }
 .Bannire {
-  
+
   width: auto;
   height: 294px;
   object-fit: contain;
@@ -135,4 +137,18 @@
 }
 .bounds {
   width: 60%;
+}
+.city{
+ width:100%;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #17998c;
+  width: 18px;
+  height: 18px;
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+  background-color: #17998c !important;
+  width: 18px;
+  height: 18px;
 }

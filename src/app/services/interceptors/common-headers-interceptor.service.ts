@@ -9,12 +9,18 @@ export class CommonHeadersInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const clone = req.clone({
-      setHeaders: {
-        'Content-Type': 'application/json'
-      }
-    });
+    if (req.url.includes('upload')) {
+      const clone = req.clone();
+      return next.handle(clone);
+    } else {
+      const clone = req.clone({
+        setHeaders: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return next.handle(clone);
+    }
 
-    return next.handle(clone);
+
   }
 }

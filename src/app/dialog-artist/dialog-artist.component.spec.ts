@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArtistDetailComponent } from './artist-detail.component';
+import { DialogArtistComponent } from './dialog-artist.component';
 
-/*describe('ArtistDetailComponent', () => {
-  let component: ArtistDetailComponent;
-  let fixture: ComponentFixture<ArtistDetailComponent>;
+describe('DialogArtistComponent', () => {
+  let component: DialogArtistComponent;
+  let fixture: ComponentFixture<DialogArtistComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArtistDetailComponent ]
+      declarations: [ DialogArtistComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArtistDetailComponent);
+    fixture = TestBed.createComponent(DialogArtistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -22,4 +22,4 @@ import { ArtistDetailComponent } from './artist-detail.component';
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});*/
+});

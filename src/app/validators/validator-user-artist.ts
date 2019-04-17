@@ -10,10 +10,11 @@ export function passwordValid(passGroup: FormGroup) {
   const confirmPassword = passGroup.controls.passwordConfirm.value;
 
   if (password === confirmPassword) {
+    console.log('pareil');
     result = null;
 
   } else {
-
+    console.log('pas pareil');
     result = {passwordValid: true};
   }
 
