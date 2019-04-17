@@ -203,3 +203,7 @@ button{
   width: inherit;
   height: inherit;
 }
+
+.noInput span{
+  font-size: 12px;
+}
